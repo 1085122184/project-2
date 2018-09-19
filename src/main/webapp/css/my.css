@@ -1,0 +1,51 @@
+@charset "UTF-8";
+.layui-layer-content {
+	color: red;
+}
+
+#go {
+	width: 45px;
+}
+
+#di {
+	margin-left: 25px
+}
+
+#demo1 {
+	margin-left: -6px
+}
+
+#ok {
+	margin-left: 10px
+}
+
+#gong {
+	margin-left: 10px
+}
+
+.btn-group.bootstrap-select.select.search {
+	width: 350px;
+	margin-left: 50px;
+}
+
+.btn-group.bootstrap-select.select.search.sinput {
+	display: none;
+	position: absolute;
+	left: 170px
+}
+.btn-group.bootstrap-select.select.search.sinput1 {
+	display: none;
+	position: absolute;
+	left: 170px
+}
+.btn-group.bootstrap-select.select.search.sinput2 {
+	display: none;
+	position: absolute;
+	left: 170px
+}
+
+#search {
+	position: absolute;
+	left: 220px;
+	text-align: left;
+}
