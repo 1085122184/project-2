@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
@@ -24,7 +23,13 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
      </bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-
+        <mvc:interceptors>
+ 			<mvc:interceptor>
+ 				<mvc:mapping path="/**"/>	<!-- 拦截路径 -->
+				<mvc:exclude-mapping path="/login"/>  <!-- 排除路径 -->
+ 				<bean class="Interceptor.LoginInterceptor"></bean>
+ 			</mvc:interceptor>
+ 		</mvc:interceptors>
 
 	<!-- 创建SqlSessionFactory，同时指定数据源 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
