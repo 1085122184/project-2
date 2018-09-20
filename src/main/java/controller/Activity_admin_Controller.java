@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -68,5 +71,36 @@ Activity_admin admin;
 	public String delete(int id, ModelMap m, HttpServletRequest req) throws Exception {
 	   return super.delete(id, m, req);
 	}
+   
+   
+   @RequestMapping("login")
+   public String login(Activity_admin ad,HttpServletRequest req,String code,ModelMap m) throws IOException {
+   	
+   	List<Activity_admin> nikes = service.login(ad);
+   	    String  session=(String) req.getSession().getAttribute("randomCode");
+//   	    if(service.login(ad).isEmpty()||!session.equalsIgnoreCase(code)) {
+//   	    	req.getSession().setAttribute("msg", "验证码错误！");
+//   	    	return "login";
+//   	    }
+   	    if(service.login(ad).isEmpty()) {
+    	req.getSession().setAttribute("msg", "验证码错误！");
+    	return "login";
+    }
+   	    else if(ad.getPass().equals(nikes.get(0).getPass())) {
+   			req.getSession().setAttribute("nike",nikes.get(0));
+   			req.getSession().removeAttribute("msg");
+   			m.put("list",service.login(ad).get(0));
+   			return "index";
+   		}else {
+   			req.getSession().setAttribute("msg", "用户名或密码错误请重新输入！");
+  			return "login";
+   		}
+	}
+   @RequestMapping("off")
+   public String off(HttpServletRequest req) {
+   	System.out.println(111);
+   	req.getSession().removeAttribute("nike");
+   	return "login";
+   }
 
 }

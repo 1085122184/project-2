@@ -37,5 +37,8 @@ public interface Activity_admin_Mapper extends BaicsMapper{
 	@Select("select count(id) count from activity_admin ${where}")
 	public int count(SearchInfo info);
 	
+	@Select("select pass from activity_admin where niki=#{niki}")
+	public List<Activity_admin> login(Activity_admin ad);
+	
 	
 }

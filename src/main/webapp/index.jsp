@@ -35,8 +35,8 @@
 
             //设置壁纸
             Win10.setBgUrl({
-                main: './admin-static/img/beijing.jpg',
-                mobile: './admin-static/img/beijing.jpg',
+                main: '../admin-static/img/beijing.jpg',
+                mobile: '../admin-static/img/beijing.jpg',
             });
 
             Win10.setAnimated([
@@ -51,19 +51,19 @@
     <div class="desktop">
         <div id="win10-shortcuts" class="shortcuts-hidden">
             <!-- 桌面图标 -->
-				<div class="shortcut" onclick="Win10.openUrl('./Activity_admin/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>管理员列表',[['47%','60%'],['100px','380px']])">
+				<div class="shortcut" onclick="Win10.openUrl('../Activity_admin/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>管理员列表',[['47%','60%'],['100px','380px']])">
 					<img class="icon"
 						src="../img/icon/admin.png" />
 					<div class="title">管理员</div>
 				</div>
 				
-				<div class="shortcut" onclick="Win10.openUrl('./Activity_user/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>用户列表')">
+				<div class="shortcut" onclick="Win10.openUrl('../Activity_user/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>用户列表')">
 					<img class="icon"
 						src="../img/icon/admin.png" />
 					<div class="title">用户</div>
 				</div>
 				
-				<div class="shortcut" onclick="Win10.openUrl('./Activity_school/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>学校列表',[['55%','58%'],['100px','480px']])">
+				<div class="shortcut" onclick="Win10.openUrl('../Activity_school/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>学校列表',[['55%','58%'],['100px','480px']])">
 					<img class="icon"
 						src="../img/icon/admin.png" />
 					<div class="title">学校</div>
