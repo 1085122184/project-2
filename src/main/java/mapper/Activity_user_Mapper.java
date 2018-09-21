@@ -13,7 +13,7 @@ import utils.SearchInfo;
 
 @Repository("Activity_user_Mapper")
 public interface Activity_user_Mapper extends BaicsMapper{
-    @Select("select u.*,s.name sname,c.name cname from activity_user u inner join activity_school s on s.id=u.school_id inner join activity_college c on c.id=u.college_id ${where} ${limit}")
+    @Select("select u.*,s.name sname,c.name cname from activity_user u left join activity_school s on s.id=u.school_id left join activity_college c on c.id=u.college_id ${where} ${limit}")
 	public List<Activity_user> select(SearchInfo info);
     
     @Select("select * from activity_user where id=#{id}")

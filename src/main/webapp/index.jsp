@@ -69,6 +69,11 @@
 					<div class="title">学校</div>
 				</div>
 
+                <div class="shortcut" onclick="Win10.openUrl('../Activity/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>活动列表',[['47%','60%'],['100px','380px']])">
+					<img class="icon"
+						src="../img/icon/admin.png" />
+					<div class="title">活动</div>
+				</div>
 
 			</div>
         <div id="win10-desktop-scene"></div>

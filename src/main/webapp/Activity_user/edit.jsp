@@ -40,7 +40,7 @@ margin-left: 228px;
 margin-top: -86px
 }
 .btn.btn-sm.form-control.dropdown-toggle{
-width: 27.2%
+width: 26.4%
 }
 .one.select.bootstrap-select.btn-group{
 margin-left: 37px;
@@ -87,6 +87,7 @@ width: 143px
 		        </c:if>
 		        <c:if test="${requestScope.subinfo==null}">
 				  <form class="row form-columned form1" id="form1" role="form" method="post" action="../Activity_user/insert_json" autocomplete="off">
+				  <input type="hidden" name="operator_id" value="${sessionScope.niki.id}">
 				</c:if>
                    <div class="col-md-4" style="margin-left: 90px">
 					<label><a id="xing">*</a>用户名</label>
@@ -283,6 +284,6 @@ width: 143px
 		})
 
 
-</script>*
+</script>
 </html>
 

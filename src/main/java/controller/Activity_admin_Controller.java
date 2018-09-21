@@ -77,7 +77,7 @@ Activity_admin admin;
    public String login(Activity_admin ad,HttpServletRequest req,String code,ModelMap m) throws IOException {
    	
    	List<Activity_admin> nikes = service.login(ad);
-   	    String  session=(String) req.getSession().getAttribute("randomCode");
+   	    //String  session=(String) req.getSession().getAttribute("randomCode");
 //   	    if(service.login(ad).isEmpty()||!session.equalsIgnoreCase(code)) {
 //   	    	req.getSession().setAttribute("msg", "验证码错误！");
 //   	    	return "login";
@@ -87,9 +87,10 @@ Activity_admin admin;
     	return "login";
     }
    	    else if(ad.getPass().equals(nikes.get(0).getPass())) {
-   			req.getSession().setAttribute("nike",nikes.get(0));
+   	    	req.getSession().setMaxInactiveInterval(600);
+   			req.getSession().setAttribute("niki",nikes.get(0));
    			req.getSession().removeAttribute("msg");
-   			m.put("list",service.login(ad).get(0));
+   			//m.put("logininfo",service.login(ad).get(0));
    			return "index";
    		}else {
    			req.getSession().setAttribute("msg", "用户名或密码错误请重新输入！");
@@ -99,7 +100,7 @@ Activity_admin admin;
    @RequestMapping("off")
    public String off(HttpServletRequest req) {
    	System.out.println(111);
-   	req.getSession().removeAttribute("nike");
+   	req.getSession().removeAttribute("niki");
    	return "login";
    }
 

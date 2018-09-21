@@ -414,15 +414,7 @@ window.Win10 = {
             var mins=myDate.getMinutes();if (mins<10){mins='0'+mins}
             $("#win10_btn_time").html(hours+':'+mins+'<br/>'+year+'/'+month+'/'+date);
         },1000);
-        //离开前警告
-        document.body.onbeforeunload = function(event){
-            var rel = Win10.lang( '系统可能不会保存您所做的更改','The system may not save the changes you have made.');
-            if(!window.event){
-                event.returnValue=rel;
-            }else{
-                window.event.returnValue=rel;
-            }
-        };
+        
         Win10.buildList();//预处理左侧菜单
         Win10._startAnimate();//动画处理
         Win10.renderShortcuts();//渲染图标
@@ -444,10 +436,7 @@ window.Win10 = {
                 $(this).parent().parent().find('.layui-layer-btn0').click();
             }
         });
-        //打广告
-        setTimeout(function () {
-            console.log(Win10.lang('本页由Win10-UI强力驱动\n更多信息：http://win10ui.yuri2.cn \nWin10-UI,轻松打造别具一格的后台界面 ','The page is strongly driven by Win10-UI.\nFor more info: http://win10ui.yuri2.cn.\n Win10-UI, easy to create a unique background interface.'))
-        },2000);
+       
         //点击清空右键菜单
         $(document).click(function (event) {
             if(!event.button)
