@@ -19,7 +19,7 @@ public interface Activity_time_Mapper extends BaicsMapper{
     @Select("select * from activity_time where id=#{id}")
 	public List<Activity_time> selectById(int id);
     
-	@Insert("insert into activity_time(activity_id,date,time1,time2,time3,time4,time5,time6,roominfo,operator_id,status,comments) values(#{activity_id},#{date},#{time1},#{time2},#{time3},#{time4},#{time5},#{time6},#{roominfo},#{operator_id},#{status},#{comments})")
+	@Insert("insert into activity_time(activity_id,start_date,end_date,time1,time2,time3,time4,time5,time6,roominfo,operator_id,status,comments) values(#{activity_id},#{start_date},#{end_date},#{time1},#{time2},#{time3},#{time4},#{time5},#{time6},#{roominfo},#{operator_id},0,#{comments})")
 	public void insert(Activity_time a);
 	
 	@Update("update activity_time set niki=#{niki},name=#{name},type=#{type},tel=#{tel},power=#{power},comments=#{comments} where id=#{id}")

@@ -16,6 +16,8 @@
     <link href="../css/default.css" rel="stylesheet">
     <script type="text/javascript" src="../js/win10.js"></script>
     <style>
+    
+    
     .win10-btn-change-url{
     display: none!important;
     }
@@ -63,13 +65,19 @@
 					<div class="title">用户</div>
 				</div>
 				
+				<div class="shortcut" onclick="Win10.openUrl('../Activity_usergroup/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>分组列表')">
+					<img class="icon"
+						src="../img/icon/admin.png" />
+					<div class="title">分组信息</div>
+				</div>
+				
 				<div class="shortcut" onclick="Win10.openUrl('../Activity_school/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>学校列表',[['55%','58%'],['100px','480px']])">
 					<img class="icon"
 						src="../img/icon/admin.png" />
 					<div class="title">学校</div>
 				</div>
 
-                <div class="shortcut" onclick="Win10.openUrl('../Activity/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>活动列表',[['47%','60%'],['100px','380px']])">
+                <div class="shortcut" onclick="Win10.openUrl('../Activity/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>活动列表')">
 					<img class="icon"
 						src="../img/icon/admin.png" />
 					<div class="title">活动</div>

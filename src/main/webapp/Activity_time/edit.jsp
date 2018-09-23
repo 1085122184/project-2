@@ -23,40 +23,10 @@
 <link href="../admin-static/css/style.css" rel="stylesheet">
 <link href="../admin-static/css/icons.css" rel="stylesheet">
 <link href="../admin-static/css/form.css" rel="stylesheet"><!-- button -->
-<style type="text/css">
-.one.select.bootstrap-select.btn-group{
-margin-left: 42px;
-margin-top: -49px
-}
-
-.two.select.bootstrap-select.btn-group{
-position:absolute;
-top:-7px;
-left:220px
-}
-.btn-alt{
-margin-left: 220px;
-margin-top: 55px
-}
-.startdate{
-width: 30%;
-height: 28px
-}
-.add-on{
-position: absolute;
-left: 147px;
-top: 49px;
-width: 34px;
-height: 28px
-}
-.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu{
-background-color: gray;
-}
-</style>
+<link href="../css/mydate.css" rel="stylesheet">
 </head>
 <body id="skin-blur-black">
-        <!--<h6>修改信息<i class="glyphicon glyphicon-remove" style="margin-left: 430px" onclick="closewin()"></i></h6>-->
-		 <h6>新增操作员<i class="glyphicon glyphicon-remove" style="margin-left: 420px" onclick="closewin()"></i></h6> 
+		 <h6>时间安排<i class="glyphicon glyphicon-remove" style="margin-left: 584px" onclick="closewin()"></i></h6> 
 		<div class="modal-footer">
 		              <c:if test="${requestScope.subinfo!=null}">
 		                <form class="row form-columned" id="form1" role="form" method="post" action="../Activity_time/update_json?id=${requestScope.subinfo.id}" autocomplete="off">
@@ -64,12 +34,63 @@ background-color: gray;
 		              <c:if test="${requestScope.subinfo==null}">
 						<form class="row form-columned" id="form1" role="form" method="post" action="../Activity_time/insert_json" autocomplete="off">
 					  </c:if>
-					       <div class="input-append date form_datetime" data-date="2012-12-21T15:25:00Z" style="height: 200px">
+					       <input type="hidden" name="operator_id" value="${sessionScope.niki.id}">
+					       <input type="hidden" name="activity_id" value="${requestScope.activity_id}">
+					       <div class="input-append date form_date" style="height: 200px;margin-left: 100px">
 					       <label>开始时间</label>
-					       <input type="text" id="mirror_field" value="" class="form-control startdate" readonly />
+					       <input type="text" id="mirror_field" value="" class="form-control startdate" readonly name="start_date"/>
                             <span class="col-md-10 add-on"><i class="glyphicon glyphicon-th icon-th" style="font-size: 24px"></i></span>
-                          </div>
-							<div class="col-md-10" style="margin-left: 57px;margin-top: -40px">
+                           </div>
+                           
+                           <div class="input-append date form_date end_date" >
+					       <label style="margin-top: 29px;margin-left: 100px">结束时间</label>
+					       <input type="text" id="mirror_field" value="" class="form-control enddate" readonly name="end_date"/>
+                            <span class="col-md-10 add-on end"><i class="glyphicon glyphicon-th icon-th" style="font-size: 24px"></i></span>
+                           </div>
+                           
+                           <div class="input-append date form_time time1">
+					       <label  style="text-align:center;margin-top: 29px;margin-left: 100px" data-date="T05:25:07Z">第一场</label>
+					       <input type="text" id="mirror_field" value="" class="form-control itime1" readonly name="time1"/>
+                            <span class="col-md-10 add-on stime1"><i class="glyphicon glyphicon-th icon-th" style="font-size: 24px"></i></span>
+                           </div>
+                           <div class="input-append date form_time time2">
+					       <label  style="text-align:center;margin-top: 29px;margin-left: 100px" data-date="T05:25:07Z">第二场</label>
+					       <input type="text" id="mirror_field" value="" class="form-control itime1" readonly name="time2"/>
+                            <span class="col-md-10 add-on stime1"><i class="glyphicon glyphicon-th icon-th" style="font-size: 24px"></i></span>
+                           </div>
+                           <div class="input-append date form_time time3">
+					       <label  style="text-align:center;margin-top: 29px;margin-left: 100px">第三场</label>
+					       <input type="text" id="mirror_field" value="" class="form-control itime1" readonly name="time3"/>
+                            <span class="col-md-10 add-on stime1"><i class="glyphicon glyphicon-th icon-th" style="font-size: 24px"></i></span>
+                           </div>
+                           <div class="input-append date form_time time4">
+					       <label  style="text-align:center;margin-top: 29px;margin-left: 100px">第四场</label>
+					       <input type="text" id="mirror_field" value="" class="form-control itime1" readonly name="time4"/>
+                            <span class="col-md-10 add-on stime1"><i class="glyphicon glyphicon-th icon-th" style="font-size: 24px"></i></span>
+                           </div>
+ 							<div class="input-append date form_time time5">
+					       <label  style="text-align:center;margin-top: 29px;margin-left: 100px">第五场</label>
+					       <input type="text" id="mirror_field" value="" class="form-control itime1" readonly name="time5"/>
+                            <span class="col-md-10 add-on stime1"><i class="glyphicon glyphicon-th icon-th" style="font-size: 24px"></i></span>
+                           </div>
+                           <div class="input-append date form_time time6">
+					       <label  style="text-align:center;margin-top: 29px;margin-left: 100px">第六场</label>
+					       <input type="text" id="mirror_field" value="" class="form-control itime1" readonly name="time6"/>
+                            <span class="col-md-10 add-on stime1"><i class="glyphicon glyphicon-th icon-th" style="font-size: 24px"></i></span>
+                           </div>
+ 							<div class="roominfo">
+					       <label  style="text-align:center;margin-top: 29px;margin-left: -106px">地点信息</label>
+					       <input type="text"class="form-control iroominfo" name="roominfo"/>
+                           </div>
+                           <div class="comments">
+					       <label  style="text-align:center;margin-top: 37px;margin-left: -82px">备注</label>
+					       <textarea name="comments" class="form-control m-b-10 com" placeholder="说点什么吧"></textarea>
+                           </div>
+                           
+ 							
+ 							
+ 							
+ 							<div class="col-md-10" style="margin-left: 166px;margin-top: -8px">
 								<button type="button" class="btn btn-alt m-r-5" onclick="save()">保存</button>
 								<button type="button" class="btn btn-alt m-r-5" onclick="closewin()">返回</button>
 							</div>
@@ -113,8 +134,18 @@ function save() {
           });
 }
 
-$(".form_datetime").datetimepicker({language:'zh-CN',format: 'yyyy-mm-dd hh:ii'});
-   
+$(".form_date").datetimepicker({
+	language:'zh-CN',
+	format: 'yyyy-mm-dd',
+	 autoclose: true,
+     todayBtn: true,
+     minView: 2,
+	});
+$(".form_time").datetimepicker({
+        format: "hh:ii",
+        startView:1,
+        autoclose: true,
+ 	});
 
 </script>
 </body>

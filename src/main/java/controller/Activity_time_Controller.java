@@ -29,6 +29,7 @@ Activity_time_Service service;
 @Override
 	public String add(ModelMap m, HttpServletRequest req) throws Exception {
 		m.put("sublist", service.select(new SearchInfo()));
+		m.put("activity_id", req.getParameter("activity_id"));
 		return super.add(m, req);
 	}
    @Override

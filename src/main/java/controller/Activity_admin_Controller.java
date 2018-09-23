@@ -76,7 +76,7 @@ Activity_admin admin;
    @RequestMapping("login")
    public String login(Activity_admin ad,HttpServletRequest req,String code,ModelMap m) throws IOException {
    	
-   	List<Activity_admin> nikes = service.login(ad);
+   	List<Activity_admin> nikis = service.login(ad);
    	    //String  session=(String) req.getSession().getAttribute("randomCode");
 //   	    if(service.login(ad).isEmpty()||!session.equalsIgnoreCase(code)) {
 //   	    	req.getSession().setAttribute("msg", "验证码错误！");
@@ -86,9 +86,9 @@ Activity_admin admin;
     	req.getSession().setAttribute("msg", "验证码错误！");
     	return "login";
     }
-   	    else if(ad.getPass().equals(nikes.get(0).getPass())) {
+   	    else if(ad.getPass().equals(nikis.get(0).getPass())) {
    	    	req.getSession().setMaxInactiveInterval(600);
-   			req.getSession().setAttribute("niki",nikes.get(0));
+   			req.getSession().setAttribute("niki",nikis.get(0));
    			req.getSession().removeAttribute("msg");
    			//m.put("logininfo",service.login(ad).get(0));
    			return "index";

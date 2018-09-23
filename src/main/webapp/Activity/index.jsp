@@ -25,7 +25,12 @@
 <link href="../admin-static/css/form.css" rel="stylesheet">
 <link href="../css/my.css" rel="stylesheet">
 <!-- button -->
-
+<style type="text/css">
+.layui-layer.layui-layer-iframe.layui-layer-border.layer-anim{
+    border: 1px solid white;
+    height: auto;
+    }
+</style>
 </head>
 <body id="skin-blur-ocean">
 
@@ -94,7 +99,8 @@ function del(id) {
 			</select>
 			<button class="btn btn-sm btn-alt m-r-5" style="position: absolute;left: 380px"><i class="glyphicon glyphicon-search"></i>搜索</button>
 			</form>
-			-->	
+			-->	<button class="btn btn-sm btn-alt m-r-5" type="button"
+				onclick="openwin('../Activity/add','500','300')">新增</button>
 			<c:if test="${fn:length(requestScope.list)==0}"><div style="height: 100px">暂无数据</div></c:if>
 			<c:if test="${fn:length(requestScope.list)!=0}">
 			<table class="tile table table-bordered table-striped"
@@ -124,7 +130,7 @@ function del(id) {
 								onclick="openwin('../Activity/edit?id=${r.id}','500','300')">修改</a>
 								<a class="glyphicon glyphicon-pencil"
 								href="javascript:;"
-								onclick="openwin('../Activity_time/add?activity_id=${r.id}','500','300')">时间安排</a>
+								onclick="openwin('../Activity_time/add?activity_id=${r.id}','660','385')">时间安排</a>
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
 								onclick="del(${r.id})">删除</a></td>
 						</tr>
