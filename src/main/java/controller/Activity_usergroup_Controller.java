@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import entity.Activity_college;
 import entity.Activity_usergroup;
+import service.Activity_Service;
 import service.Activity_college_Service;
 import service.Activity_school_Service;
 import service.Activity_user_Service;
 import service.Activity_usergroup_Service;
 import utils.SearchInfo;
+import utils.SearchInfo_3;
 
 @Controller
 @RequestMapping("Activity_usergroup")
@@ -29,7 +31,9 @@ Activity_school_Service sservice;
 Activity_college_Service scervice;
 @Resource(name="Activity_user_ServiceImpl")
 Activity_user_Service uservice;
-
+@Resource(name="Activity_ServiceImpl")
+Activity_Service aservice;
+Activity_usergroup usergroup;
 
 @Override
 	public void index(SearchInfo info, ModelMap m, HttpServletRequest req) throws Exception {
@@ -56,15 +60,31 @@ Activity_user_Service uservice;
 //	    info.setWhere(where);
 //	    m.put("select",select);
 //	    m.put("txt",select==0?"'"+txt+"'":txt);
+	   
 		m.put("count", service.count(info));
 		m.put("page",info.getPageno());
 		super.index(info, m, req);
 	}
-
+@Override
+	public List<Activity_usergroup> index_json(SearchInfo info, ModelMap m, HttpServletRequest req) throws Exception {
+		m.put("count", service.count(info));
+		m.put("page",info.getPageno());
+		return super.index_json(info, m, req);
+	}
 @Override
 	public String add(ModelMap m, HttpServletRequest req) throws Exception {
-		m.put("sublist", service.select(new SearchInfo()));
-		m.put("user", uservice.select(new SearchInfo()));
+	    if(service.select(new SearchInfo()).size()==0) {
+	    	m.put("user1",uservice.select(new SearchInfo()));
+	    }else {
+	    SearchInfo_3 info3 = new SearchInfo_3();
+	    SearchInfo info = new SearchInfo();
+	    String ids = service.selectAllids().get(0).getIds();
+		info.setWhere(" where u.id in ("+ids+")");
+        info3.setWhere(" where u.id not in ("+ids+")");
+		m.put("user1", service.selectnotids(info3));
+		m.put("user2", service.selectids(info));
+	    }
+		m.put("activity",aservice.select(new SearchInfo()));
 		Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date = sdf.format(d);
@@ -82,10 +102,22 @@ Activity_user_Service uservice;
 	   return super.delete(id, m, req);
 	}
    
-    @RequestMapping("select")
-    public @ResponseBody List<Activity_college> select(int school_id){
-        
-    	return scervice.selectBysid(school_id);
+    @RequestMapping("adduser")
+    public String select(ModelMap m,SearchInfo_3 info3,SearchInfo info,int id){
+		String ids = service.selectAllids().get(0).getIds();
+		info.setWhere(" where u.id in ("+ids+")");
+        info3.setWhere(" where u.id not in ("+ids+")");
+		m.put("user1", service.selectnotids(info3));
+		m.put("user2", service.selectids(info));
+		
+		
+    	return "Activity_usergroup/userlist";
+    }
+    @RequestMapping("userlist")
+    public void userlist(ModelMap m,SearchInfo_3 info3){
+	    m.put("count", uservice.count(new SearchInfo()));
+	    m.put("page", info3.getPageno());
+		m.put("user", uservice.select_3(info3));
     }
 
 }

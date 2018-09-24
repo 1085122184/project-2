@@ -22,6 +22,7 @@ public class Activity_usergroup implements Serializable{
 	String creatdate;
 	int operator_id;
 	String comments;
+	
 	public int getId() {
 		return id;
 	}

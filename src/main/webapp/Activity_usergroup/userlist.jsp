@@ -24,7 +24,7 @@
 <link href="../admin-static/css/form.css" rel="stylesheet"><!-- button -->
 <style type="text/css">
 .sex.select.bootstrap-select.btn-group{
-margin-left: 55px;
+margin-left: 49px;
 margin-top: -49px
 }
 .school.select.bootstrap-select.btn-group{
@@ -58,7 +58,9 @@ margin-top: 55px
 .layui-layer-content.layui-layer-padding{
 color: red;
 }
-
+#xing{
+color: red;
+}
 .Type{
 margin-top: 6px;
 margin-left: 13px
@@ -66,58 +68,26 @@ margin-left: 13px
 .dropdown-menu.inner{
 width: 143px
 }
+
 .btn.btn-sm.btn-alt{
 margin-left: 1px;
 margin-top: -10px
+
 }
-label{
-display:inline-block;
-width: 52px
-}
+
 </style>
 </head>
 <body id="skin-blur-black">
         <!--<h6>修改信息<i class="glyphicon glyphicon-remove" style="margin-left: 430px" onclick="closewin()"></i></h6>-->
-		 <h6>新增用户<i class="glyphicon glyphicon-remove" style="margin-left: 530px" onclick="closewin()"></i></h6> 
-		<div class="tab-container tile">
-		   <ul class="nav tab nav-tabs">
-               <li class="active"><a href="#home-b">分组信息</a></li>
-               <li><a href="#profile-b">小组成员</a></li>
-           </ul>
-           <div class="tab-content">
-              <div class="tab-pane active" id="home-b">
-				  <form class="row form-columned form1" id="form1" role="form" method="post" action="../Activity_usergroup/insert_json" autocomplete="off">
-				  <input type="hidden" name="operator_id" value="${sessionScope.niki.id}">
-				  <input type="hidden" name="creatdate" value="${requestScope.date}">
-                   <div class="col-md-4" style="margin-left: 90px">
-					<label style="text-align: right;">小组名称</label>
-					<input type="text" class="form-control input-sm m-b-10" value="${requestScope.subinfo.niki}"
-					    placeholder="你的小组名称" id="one" name="name" style="width: 130px;display: inline;">&nbsp;&nbsp;&nbsp;
-					</div>
-                 <div class="clearfix"></div>
-			     <br>
-			       <div class="col-md-4 m-b-10" style="margin-left: 90px">
-				     <label style="text-align: right;">报名活动</label>
-                     <select name="activity_id" class="select sex" id="one" style="display: inline;">
-                       <c:forEach items="${requestScope.activity}" var="r">
-                         <option value="${r.id}">${r.name}</option>
-                       </c:forEach>
-                     </select>
-                   </div>
-                   <div class="col-md-12" style="margin-left: 90px">
-					 <label style="text-align: right;">备注</label>
-					 <textarea id="one" name="comments" class="form-control m-b-10" placeholder="说点什么吧" style="width: 301px;margin-left: 55px;margin-top: -26px">${requestScope.subinfo.comments}</textarea>
-		    	   </div>
-                  </form>
-              </div>
-              <div class="tab-pane" id="profile-b" style="overflow:auto;height: 271px">
-                 <form class="form1" autocomplete="off">
-                   <input type="hidden" class="form-control ids" name="ids">
+		 <h6>新增用户<i class="glyphicon glyphicon-remove" style="margin-left: 543px" onclick="closewin()"></i></h6> 
+              <div style="overflow:auto;height: 306px">
+				<form class="form1" autocomplete="off">
+					<input type="te" class="form-control ids" name="ids">
 					<table class="tile table table-bordered table-striped"
 						style="width: 100%">
 						<thead>
 							<tr>
-								<th>全选<input type="checkbox" class="chk"></th>
+								<th>全选<input type="checkbox"></th>
 								<th>姓名</th>
 								<th>性别</th>
 								<th>手机</th>
@@ -138,7 +108,7 @@ width: 52px
 							</c:forEach>
 							<c:forEach items="${requestScope.user2}" var="r">
 								<tr>
-									<td><input type="checkbox" disabled="disabled" myid="${r.id}"></td>
+									<td><input type="checkbox" class="ch" checked="checked" myid="${r.id}"></td>
 									<td>${r.name}</td>
 									<td>${r.sex_name}</td>
 									<td>${r.tel}</td>
@@ -148,18 +118,19 @@ width: 52px
 							</c:forEach>
 						</tbody>
 					</table>
-                 </form>
-              </div>
-             </div>
-         </div>
+				</form>
+			</div>
          <div class="col-md-10">
-			 <button type="button" class="btn btn-alt m-r-5" onclick="save()" style="position: absolute;left: 239px;top: -71px">保存</button>
-			 <button type="button" class="btn btn-alt m-r-5" onclick="closewin()" style="position: absolute;left: 298px;top: -71px">返回</button>
+			 <button type="button" class="btn btn-alt m-r-5" onclick="save()" style="position: absolute;left: 239px;top: -55px">保存</button>
+			 <button type="button" class="btn btn-alt m-r-5" onclick="closewin()" style="position: absolute;left: 298px;top: -55px">返回</button>
 		 </div>
  		<!-- Javascript Libraries -->
 		<!-- jQuery -->
 		<script src="../admin-static/js/jquery.min.js"></script>
 		<!-- jQuery Library -->
+		<script type="text/javascript"
+		src="../component/layer-v3.0.3/layer/layer.js"></script>
+	<script type="text/javascript" src="../component/layui/layui.js"></script>
 		<!-- Bootstrap -->
 		<script src="../admin-static/js/bootstrap.min.js"></script>
 		<!-- UX -->
@@ -172,9 +143,17 @@ width: 52px
 		<script src="../admin-static/js/functions.js"></script>
 		<script src="../admin-static/js/select.min.js"></script> <!-- Custom Select -->
 		<script type="text/javascript" src="../component/layer-v3.0.3/layer/layer.js"></script>
-		<script src="../admin-static/js/icheck.js"></script> <!-- Custom Checkbox + Radio -->
+		 <script src="../admin-static/js/icheck.js"></script> <!-- Custom Checkbox + Radio -->
 		<script type="text/javascript">
 		$(function() {
+			var ids=[];
+			   $(".ch").each(function(){
+				   if($(this).prop("checked")){
+					   ids.push($(this).attr("myid"));
+				   }
+			   }); 
+			   $(".ids").val(ids);
+			
 			$(".iCheck-helper").eq(0).on("click",function(){
 				if($(".icheckbox_minimal").attr("class")=='icheckbox_minimal hover checked'){
 				    $(".icheckbox_minimal").addClass("checked");
@@ -193,7 +172,9 @@ width: 52px
 					   }
 				   }); 
 				   $(".ids").val(ids);
-			 });
+			 }); 
+			$(".btn-group.bootstrap-select.select.sex").append($("<label class='Type'><a id='xing'>*</a>类型</label>"));
+			$(".btn-group.bootstrap-select.select.school").append($("<label class='Type'><a id='xing'>*</a>学院</label>"));
 		})
 
 		

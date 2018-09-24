@@ -1,7 +1,7 @@
 package utils;
 
-public class SearchInfo {
-	private int max = 8;
+public class SearchInfo_3 {
+	private int max = 5;
 	private Integer pageno = 1;
 	private String limit = " limit " + (pageno - 1) * max + "," + max;
     private Integer select;

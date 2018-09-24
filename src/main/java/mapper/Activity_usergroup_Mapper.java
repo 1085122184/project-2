@@ -8,8 +8,10 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import entity.Activity_user;
 import entity.Activity_usergroup;
 import utils.SearchInfo;
+import utils.SearchInfo_3;
 
 @Repository("Activity_usergroup_Mapper")
 public interface Activity_usergroup_Mapper extends BaicsMapper{
@@ -19,7 +21,7 @@ public interface Activity_usergroup_Mapper extends BaicsMapper{
     @Select("select * from activity_usergroup where id=#{id}")
 	public List<Activity_usergroup> selectById(int id);
     
-	@Insert("insert into activity_usergroup() values()")
+	@Insert("insert into activity_usergroup(name,activity_id,ids,comments,creatdate,operator_id) values(#{name},#{activity_id},#{ids},#{comments},#{creatdate},#{operator_id})")
 	public void insert(Activity_usergroup au);
 	
 	@Update("update activity_usergroup set  where id=#{id}")
@@ -37,5 +39,13 @@ public interface Activity_usergroup_Mapper extends BaicsMapper{
 	@Select("select count(id) count from activity_usergroup ${where}")
 	public int count(SearchInfo info);
 	
+	@Select("select GROUP_CONCAT(ids) ids from activity_usergroup")
+	public List<Activity_usergroup> selectAllids();
+	
+	@Select("select u.*,s.name sname from activity_user u inner join activity_school s on s.id=u.school_id ${where}")
+	public List<Activity_user> selectids(SearchInfo info);
+	
+	@Select("select u.*,s.name sname from activity_user u inner join activity_school s on s.id=u.school_id ${where}")
+	public List<Activity_user> selectnotids(SearchInfo_3 info3);
 	
 }

@@ -10,11 +10,15 @@ import org.springframework.stereotype.Repository;
 
 import entity.Activity_user;
 import utils.SearchInfo;
+import utils.SearchInfo_3;
 
 @Repository("Activity_user_Mapper")
 public interface Activity_user_Mapper extends BaicsMapper{
     @Select("select u.*,s.name sname,c.name cname from activity_user u left join activity_school s on s.id=u.school_id left join activity_college c on c.id=u.college_id ${where} ${limit}")
 	public List<Activity_user> select(SearchInfo info);
+	
+	@Select("select u.*,s.name sname,c.name cname from activity_user u left join activity_school s on s.id=u.school_id left join activity_college c on c.id=u.college_id")
+	public List<Activity_user> select_3(SearchInfo_3 info3);
     
     @Select("select * from activity_user where id=#{id}")
 	public List<Activity_user> selectById(int id);
@@ -37,5 +41,6 @@ public interface Activity_user_Mapper extends BaicsMapper{
 	@Select("select count(id) count from activity_user ${where}")
 	public int count(SearchInfo info);
 	
-	
+	@Select("select * from activity_user")
+	public List<Activity_user> selectAll();
 }

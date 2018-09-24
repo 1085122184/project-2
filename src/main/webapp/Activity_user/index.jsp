@@ -148,7 +148,7 @@ function del(id) {
 				    elem: 'demo1'
 				    ,count: ${requestScope.count}
 			  		,curr: ${requestScope.page}
-				    ,layout: [ 'prev', 'page', 'next', 'count',, 'skip']
+				    ,layout: [ 'prev', 'page', 'next', 'count','skip']
 				    ,jump: function(obj,first){
 				      if(!first){
 				    	  location.href="../Activity_user/index?pageno="+obj.curr;
