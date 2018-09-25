@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import entity.Activity;
 import entity.Activity_college;
 import entity.Activity_usergroup;
 import service.Activity_Service;
@@ -17,6 +19,7 @@ import service.Activity_college_Service;
 import service.Activity_school_Service;
 import service.Activity_user_Service;
 import service.Activity_usergroup_Service;
+import utils.JsonInfo;
 import utils.SearchInfo;
 import utils.SearchInfo_3;
 
@@ -33,6 +36,8 @@ Activity_college_Service scervice;
 Activity_user_Service uservice;
 @Resource(name="Activity_ServiceImpl")
 Activity_Service aservice;
+
+
 Activity_usergroup usergroup;
 
 @Override
@@ -91,6 +96,31 @@ Activity_usergroup usergroup;
         m.put("date",date);
 		return super.add(m, req);
 	}
+//@Override
+//	public JsonInfo insert_json(Activity_usergroup o, ModelMap m, HttpServletRequest req) throws Exception {
+//	    service.insert(o);
+//	    int id=o.getActivity_id();
+//	    int group_id=service.Maxid();
+//	    Activity a = new Activity();
+//	    a.setGroup_id(","+group_id+"");
+//	    a.setId(id);
+//	    System.out.println(a.getGroup_id());
+//	    service.updateids(a);
+//		return super.insert_json(o, m, req);
+//	}
+@RequestMapping("myinsert_json")
+public @ResponseBody JsonInfo myinsert_json(Activity_usergroup o, ModelMap m, HttpServletRequest req) {
+	service.insert(o);
+    int id=o.getActivity_id();
+    int group_id=service.Maxid();
+    Activity a = new Activity();
+    a.setGroup_id(","+group_id+"");
+    a.setId(id);
+    System.out.println(a.getGroup_id());
+    service.updateids(a);
+	return new JsonInfo(1, "");
+}
+   
    @Override
 	public String edit(int id, ModelMap m, HttpServletRequest req) throws Exception {
 		m.put("subinfo", service.selectById(id).get(0));

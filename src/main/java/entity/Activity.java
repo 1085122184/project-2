@@ -22,6 +22,24 @@ public class Activity implements Serializable{
 	int charge_operator_id;
 	int status;
 	String comments;
+	String group_ids;
+	String group_id;
+	public String[] getGroupidlist() {
+		if(group_ids.length()<1)return new String[0];
+		return group_ids.split(",");
+	}
+	public String getGroup_id() {
+		return group_id;
+	}
+	public void setGroup_id(String group_id) {
+		this.group_id = group_id;
+	}
+	public String getGroup_ids() {
+		return group_ids;
+	}
+	public void setGroup_ids(String group_ids) {
+		this.group_ids = group_ids;
+	}
 	public int getId() {
 		return id;
 	}

@@ -23,6 +23,7 @@ Activity_Service service;
 	public void index(SearchInfo info, ModelMap m, HttpServletRequest req) throws Exception {
 		m.put("count", service.count(info));
 		m.put("page",info.getPageno());
+		
 		super.index(info, m, req);
 	}
 

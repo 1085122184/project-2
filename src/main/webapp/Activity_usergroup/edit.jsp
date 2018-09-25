@@ -86,7 +86,7 @@ width: 52px
            </ul>
            <div class="tab-content">
               <div class="tab-pane active" id="home-b">
-				  <form class="row form-columned form1" id="form1" role="form" method="post" action="../Activity_usergroup/insert_json" autocomplete="off">
+				  <form class="row form-columned form1" id="form1" role="form" method="post" action="../Activity_usergroup/myinsert_json" autocomplete="off">
 				  <input type="hidden" name="operator_id" value="${sessionScope.niki.id}">
 				  <input type="hidden" name="creatdate" value="${requestScope.date}">
                    <div class="col-md-4" style="margin-left: 90px">

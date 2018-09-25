@@ -110,7 +110,7 @@ function del(id) {
 						<th style="width: 20%">活动名称</th>
 						<th style="width: 10%">活动时间</th>
 						<th style="width: 18%">活动类型</th>
-						<th style="width: 10%">班级数量</th>
+						<th style="width: 10%">小组数量</th>
 						<th style="width: 15%">参赛人数</th>
 						<th style="width: 10%">注意事项</th>
 						<th style="width: 20%">操作</th>
@@ -122,7 +122,7 @@ function del(id) {
 							<td>${r.name}</td>
 							<td>${r.dateinfo}</td>
 							<td>${r.type}</td>
-							<td>${r.classcount}</td>
+							<td>${fn:length(r.groupidlist)-1}</td>
 							<td>${r.count}</td>
 							<td>${r.attention}</td>
 							<td><a class="glyphicon glyphicon-pencil"

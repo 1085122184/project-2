@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import entity.Activity;
 import entity.Activity_user;
 import entity.Activity_usergroup;
 import mapper.Activity_usergroup_Mapper;
@@ -30,6 +31,11 @@ public List<Activity_user> selectnotids(SearchInfo_3 info3) {
 public List<Activity_usergroup> selectAllids() {
 	// TODO Auto-generated method stub
 	return mapper.selectAllids();
+}
+
+public void updateids(Activity a) {
+	mapper.updateids(a);
+	
 }
 
 }

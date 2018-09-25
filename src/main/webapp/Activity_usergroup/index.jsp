@@ -91,7 +91,7 @@ function del(id) {
 							<td>${r.name}</td>
 							<td>${r.project}</td>
 							<td>${r.point1}</td>
-							<td>${r.ids}</td>
+							<td>${fn:length(r.idlist)}</td>
 							<td><a class="glyphicon glyphicon-pencil"
 								href="javascript:;"
 								onclick="openwin('../Activity_usergroup/edit?id=${r.id}','610','400')">修改</a>

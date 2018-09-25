@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import entity.Activity;
 import entity.Activity_user;
 import entity.Activity_usergroup;
 import utils.SearchInfo;
@@ -47,5 +48,8 @@ public interface Activity_usergroup_Mapper extends BaicsMapper{
 	
 	@Select("select u.*,s.name sname from activity_user u inner join activity_school s on s.id=u.school_id ${where}")
 	public List<Activity_user> selectnotids(SearchInfo_3 info3);
+	
+	@Update("UPDATE activity set group_ids=CONCAT(group_ids,#{group_id}) where id=#{id}")
+	public void updateids(Activity a);
 	
 }

@@ -96,9 +96,9 @@ margin-top: -10px
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${requestScope.user1}" var="r">
+							<c:forEach items="${requestScope.user2}" var="r">
 								<tr>
-									<td><input type="checkbox" class="ch" myid="${r.id}"></td>
+									<td><input type="checkbox" class="ch" checked="checked" myid="${r.id}"></td>
 									<td>${r.name}</td>
 									<td>${r.sex_name}</td>
 									<td>${r.tel}</td>
@@ -106,9 +106,9 @@ margin-top: -10px
 									<td>${r.sname}</td>
 								</tr>
 							</c:forEach>
-							<c:forEach items="${requestScope.user2}" var="r">
+							<c:forEach items="${requestScope.user1}" var="r">
 								<tr>
-									<td><input type="checkbox" class="ch" checked="checked" myid="${r.id}"></td>
+									<td><input type="checkbox" class="ch" myid="${r.id}"></td>
 									<td>${r.name}</td>
 									<td>${r.sex_name}</td>
 									<td>${r.tel}</td>
