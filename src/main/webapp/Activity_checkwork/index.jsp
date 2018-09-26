@@ -55,7 +55,7 @@ function del(id) {
 	          //几个参数需要注意一下
 	              type: "POST",//方法类型
 	              dataType: "json",//预期服务器返回的数据类型
-	              url: "../Activity_usergroup/delete_json?id="+id,//url
+	              url: "../Activity_checkwork/delete_json?id="+id,//url
 	              success: function (result) {
 	            	  fresh();
 	              },
@@ -69,41 +69,41 @@ function del(id) {
 	<!-- Table Striped -->
 	<div class="block-area" id="tableStriped">
 		<div class="table-responsive overflow">
-		<button class="btn btn-sm btn-alt m-r-5" type="button"
-				onclick="openwin('../Activity_usergroup/add','610','400')">新增</button>
-			<div>
-			<c:if test="${fn:length(requestScope.list)==0}">暂无数据</c:if>
-			</div>
+			<button class="btn btn-sm btn-alt m-r-5" type="button"
+				onclick="openwin('../Activity_checkwork/add','350','200')">新增</button>
+			<c:if test="${fn:length(requestScope.list)==0}"><div style="height: 100px">暂无数据</div></c:if>
 			<c:if test="${fn:length(requestScope.list)!=0}">
 			<table class="tile table table-bordered table-striped"
 				style="width: 100%">
 				<thead>
 					<tr>
-					    <th>添加人</th>
-					    <th>创建时间</th>
-						<th>小组名称</th>
-						<th>作品</th>
-						<th>平均分数</th>
-						<th>小组人数</th>
+						<th>活动名称</th>
+						<th>用户姓名</th>
+						<th>时间</th>
+						<th>早</th>
+						<th>中</th>
+						<th>晚</th>
+						<th>最后时间</th>
 						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${requestScope.list}" var="r">
 						<tr>
-						    <td>${r.operator_id}</td>
-						    <td>${r.creatdate}</td>
 							<td>${r.name}</td>
-							<td>${r.project}</td>
-							<td>${r.point1}</td>
-							<td>${fn:length(r.idlist)}</td>
+							<td>${r.name}</td>
+							<td>${r.name}</td>
+							<td>${r.name}</td>
+							<td>${r.name}</td>
+							<td>${r.name}</td>
+							<td>${r.name}</td>
 							<td><a class="glyphicon glyphicon-pencil"
 								href="javascript:;"
-								onclick="openwin('../Activity_usergroup/edit?id=${r.id}','610','400')">修改</a>
+								onclick="openwin('../Activity_checkwork/edit?id=${r.id}','500','300')">修改</a>
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
 								onclick="del(${r.id})">删除</a>
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
-								onclick="openwin('../Activity_usergroup/adduser?id=${r.id}','610','400')">添加组员</a></td>
+								onclick="openwin('../Activity_college/addid?school_id=${r.id}','350','200')">新增学院</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -137,12 +137,12 @@ function del(id) {
 			  //执行一个laypage实例
 			  laypage.render({ 
 				    elem: 'demo1'
-				    ,count: ${requestScope.count}
-			  		,curr: ${requestScope.page}
+				    ,count: ${requestScope.count} 
+			  		,curr: ${requestScope.page} 
 				    ,layout: [ 'prev', 'page', 'next', 'count',, 'skip']
 				    ,jump: function(obj,first){
 				      if(!first){
-				    	  location.href="../Activity_usergroup/index?pageno="+obj.curr;
+				    	  location.href="../Activity_checkwork/index?pageno="+obj.curr;
 				        } 
 				    }
 				  });
@@ -150,7 +150,7 @@ function del(id) {
 		$(function() {
 			if(${fn:length(requestScope.list)==0&&requestScope.count!=0}){ 
 				 var pageno = ${requestScope.page-1} 
-				 location.href="../Activity_usergroup/index?pageno="+pageno;
+				 location.href="../Activity_checkwork/index?pageno="+pageno;
 			}
 		});
 		

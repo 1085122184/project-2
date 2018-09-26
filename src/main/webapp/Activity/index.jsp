@@ -111,7 +111,6 @@ function del(id) {
 						<th style="width: 10%">活动时间</th>
 						<th style="width: 18%">活动类型</th>
 						<th style="width: 10%">小组数量</th>
-						<th style="width: 15%">参赛人数</th>
 						<th style="width: 10%">注意事项</th>
 						<th style="width: 20%">操作</th>
 					</tr>
@@ -121,16 +120,16 @@ function del(id) {
 						<tr>
 							<td>${r.name}</td>
 							<td>${r.dateinfo}</td>
-							<td>${r.type}</td>
+							<td>${r.type_name}</td>
 							<td>${fn:length(r.groupidlist)-1}</td>
-							<td>${r.count}</td>
 							<td>${r.attention}</td>
 							<td><a class="glyphicon glyphicon-pencil"
 								href="javascript:;"
-								onclick="openwin('../Activity/edit?id=${r.id}','500','300')">修改</a>
-								<a class="glyphicon glyphicon-pencil"
-								href="javascript:;"
 								onclick="openwin('../Activity_time/add?activity_id=${r.id}','660','385')">时间安排</a>
+								
+								
+								<a class="glyphicon glyphicon-trash" href="javascript:;"
+								onclick="openwin('../Activity/activityinfo?id=${r.id}','760','485')     ">查看</a>
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
 								onclick="del(${r.id})">删除</a></td>
 						</tr>

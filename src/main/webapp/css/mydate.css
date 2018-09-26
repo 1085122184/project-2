@@ -4,6 +4,7 @@ margin-left: 42px;
 margin-top: -49px
 }
 
+
 .two.select.bootstrap-select.btn-group{
 position:absolute;
 top:-7px;
@@ -13,13 +14,7 @@ left:220px
 margin-left: 220px;
 margin-top: 55px
 }
-.startdate{
-width: 19.1%;
-height: 28px;
-position: absolute;
-left: 160px;
-top: 45px
-}
+
 .enddate{
 width: 82%;
 height: 28px;
@@ -42,7 +37,7 @@ top: 25px;
 }
 .end_date{
 position: absolute;
-left: 240px;
+left: 8px;
 top: 20px
 }
 .datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu{
@@ -108,5 +103,6 @@ top: 200px
 position: absolute;
 left: -52px;
 top: 35px;
-width: 357px
+width: 357px;
+
 }

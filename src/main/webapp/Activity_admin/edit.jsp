@@ -37,6 +37,7 @@ left:220px
 margin-left: 220px;
 margin-top: 55px
 }
+
 </style>
 </head>
 <body id="skin-blur-black">

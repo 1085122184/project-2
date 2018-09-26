@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import entity.Activity_time;
 import utils.SearchInfo;
+import utils.SearchInfo_activity_id;
 
 @Repository("Activity_time_Mapper")
 public interface Activity_time_Mapper extends BaicsMapper{
@@ -18,11 +19,14 @@ public interface Activity_time_Mapper extends BaicsMapper{
     
     @Select("select * from activity_time where id=#{id}")
 	public List<Activity_time> selectById(int id);
+	
+	@Select("select * from activity_time where activity_id=#{activity_id} ${limit}")
+	public List<Activity_time> selectByactivity_id(SearchInfo_activity_id infoid);
     
-	@Insert("insert into activity_time(activity_id,start_date,end_date,time1,time2,time3,time4,time5,time6,roominfo,operator_id,status,comments) values(#{activity_id},#{start_date},#{end_date},#{time1},#{time2},#{time3},#{time4},#{time5},#{time6},#{roominfo},#{operator_id},0,#{comments})")
+	@Insert("insert into activity_time(activity_id,dateinfo,time1,time2,time3,time4,time5,time6,roominfo,operator_id,status,comments) values(#{activity_id},#{dateinfo},#{time1},#{time2},#{time3},#{time4},#{time5},#{time6},#{roominfo},#{operator_id},#{status},#{comments})")
 	public void insert(Activity_time a);
 	
-	@Update("update activity_time set niki=#{niki},name=#{name},type=#{type},tel=#{tel},power=#{power},comments=#{comments} where id=#{id}")
+	@Update("update activity_time set start_date=#{start_date},end_date=#{end_date},time1=#{time1},time2=#{time2},time3=#{time3},time4=#{time4},time5=#{time5},time6=#{time6},roominfo=#{roominfo} where id=#{id}")
 	public void update(Activity_time a);
 	
 	@Update("update activity_time set name=#{name},parentid=#{parentid} ${where}")
@@ -40,5 +44,10 @@ public interface Activity_time_Mapper extends BaicsMapper{
 	@Select("select * from activity_time where niki=#{niki}")
 	public List<Activity_time> login(Activity_time a);
 	
+	@Select("select * from activity_time where activity_id=#{id}")
+	public List<Activity_time> selectByactivityId(int id);
+	
+	@Select("select count(id) count from activity_time where activity_id=#{activity_id}")
+	public int countByactivity_id(int activity_id);
 	
 }

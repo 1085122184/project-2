@@ -38,4 +38,14 @@ public void updateids(Activity a) {
 	
 }
 
+public void updateuserid(Activity a) {
+	mapper.updateuserid(a);
+	
+}
+
+public void updateuseridto0(Activity a) {
+	mapper.updateuseridto0(a);
+	
+}
+
 }

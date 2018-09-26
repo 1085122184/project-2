@@ -24,6 +24,122 @@ public class Activity implements Serializable{
 	String comments;
 	String group_ids;
 	String group_id;
+	String uname;
+	String auname;
+	int uid;
+	int auid;
+	String start_date;
+	String end_date;
+	String time1;
+	String time2;
+	String time3;
+	String time4;
+	String time5;
+	String time6;
+	String roominfo;
+	String ids;
+	int group_id2;
+	
+	public static String[] types={"ÊµÑµ","Ðû½²","±ÈÈü"};
+	public String getType_name() {
+		return types[type];
+	}
+	
+	
+	
+	
+	
+	
+	public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+	public int getAuid() {
+		return auid;
+	}
+	public void setAuid(int auid) {
+		this.auid = auid;
+	}
+	public String getAuname() {
+		return auname;
+	}
+	public void setAuname(String auname) {
+		this.auname = auname;
+	}
+	public int getGroup_id2() {
+		return group_id2;
+	}
+	public void setGroup_id2(int group_id2) {
+		this.group_id2 = group_id2;
+	}
+	public String getIds() {
+		return ids;
+	}
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
+	public String getUname() {
+		return uname;
+	}
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+	public String getStart_date() {
+		return start_date;
+	}
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
+	}
+	public String getEnd_date() {
+		return end_date;
+	}
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
+	public String getTime1() {
+		return time1;
+	}
+	public void setTime1(String time1) {
+		this.time1 = time1;
+	}
+	public String getTime2() {
+		return time2;
+	}
+	public void setTime2(String time2) {
+		this.time2 = time2;
+	}
+	public String getTime3() {
+		return time3;
+	}
+	public void setTime3(String time3) {
+		this.time3 = time3;
+	}
+	public String getTime4() {
+		return time4;
+	}
+	public void setTime4(String time4) {
+		this.time4 = time4;
+	}
+	public String getTime5() {
+		return time5;
+	}
+	public void setTime5(String time5) {
+		this.time5 = time5;
+	}
+	public String getTime6() {
+		return time6;
+	}
+	public void setTime6(String time6) {
+		this.time6 = time6;
+	}
+	public String getRoominfo() {
+		return roominfo;
+	}
+	public void setRoominfo(String roominfo) {
+		this.roominfo = roominfo;
+	}
 	public String[] getGroupidlist() {
 		if(group_ids.length()<1)return new String[0];
 		return group_ids.split(",");

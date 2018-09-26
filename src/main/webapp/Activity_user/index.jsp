@@ -25,7 +25,12 @@
 <link href="../admin-static/css/form.css" rel="stylesheet">
 <link href="../css/my.css" rel="stylesheet">
 <!-- button -->
-
+<style type="text/css">
+.layui-layer.layui-layer-iframe.layui-layer-border.layer-anim{
+    border: 1px solid white;
+    height: auto;
+    }
+</style>
 </head>
 <body id="skin-blur-ocean">
 

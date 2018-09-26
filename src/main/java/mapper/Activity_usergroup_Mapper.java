@@ -25,7 +25,7 @@ public interface Activity_usergroup_Mapper extends BaicsMapper{
 	@Insert("insert into activity_usergroup(name,activity_id,ids,comments,creatdate,operator_id) values(#{name},#{activity_id},#{ids},#{comments},#{creatdate},#{operator_id})")
 	public void insert(Activity_usergroup au);
 	
-	@Update("update activity_usergroup set  where id=#{id}")
+	@Update("update activity_usergroup set ids=#{ids} where id=#{id}")
 	public void update(Activity_usergroup au);
 	
 	@Update("update activity_usergroup set name=#{name},parentid=#{parentid} ${where}")
@@ -51,5 +51,11 @@ public interface Activity_usergroup_Mapper extends BaicsMapper{
 	
 	@Update("UPDATE activity set group_ids=CONCAT(group_ids,#{group_id}) where id=#{id}")
 	public void updateids(Activity a);
+	
+	@Update("update activity_user set group_id=#{group_id2} where id in (${ids})")
+	public void updateuserid(Activity a);
+	
+	@Update("update activity_user set group_id=0 where id not in (${ids}) and group_id=#{id}")
+	public void updateuseridto0(Activity a);
 	
 }

@@ -81,8 +81,8 @@ margin-top: -10px
         <!--<h6>修改信息<i class="glyphicon glyphicon-remove" style="margin-left: 430px" onclick="closewin()"></i></h6>-->
 		 <h6>新增用户<i class="glyphicon glyphicon-remove" style="margin-left: 543px" onclick="closewin()"></i></h6> 
               <div style="overflow:auto;height: 306px">
-				<form class="form1" autocomplete="off">
-					<input type="te" class="form-control ids" name="ids">
+				<form class="form1" autocomplete="off" action="../Activity_usergroup/update_json?id=${requestScope.id}">
+					<input type="hidden" class="form-control ids" name="ids">
 					<table class="tile table table-bordered table-striped"
 						style="width: 100%">
 						<thead>
@@ -118,12 +118,13 @@ margin-top: -10px
 							</c:forEach>
 						</tbody>
 					</table>
-				</form>
-			</div>
-         <div class="col-md-10">
+					<div class="col-md-10">
 			 <button type="button" class="btn btn-alt m-r-5" onclick="save()" style="position: absolute;left: 239px;top: -55px">保存</button>
 			 <button type="button" class="btn btn-alt m-r-5" onclick="closewin()" style="position: absolute;left: 298px;top: -55px">返回</button>
-		 </div>
+		           </div>
+				</form>
+			</div>
+         
  		<!-- Javascript Libraries -->
 		<!-- jQuery -->
 		<script src="../admin-static/js/jquery.min.js"></script>
@@ -187,7 +188,7 @@ margin-top: -10px
                   //几个参数需要注意一下
                    type: "POST",//方法类型
                    dataType: "json",//预期服务器返回的数据类型
-                   url: $('#form1').attr("action"),//url
+                   url: $('.form1').attr("action"),//url
                    data: $('.form1').serialize(),
                    success: function (result) {
             	        parent.fresh();

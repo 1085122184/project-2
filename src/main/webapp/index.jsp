@@ -82,6 +82,18 @@
 						src="../img/icon/admin.png" />
 					<div class="title">活动</div>
 				</div>
+				
+				<div class="shortcut" onclick="Win10.openUrl('../Activity_checkwork/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>考勤列表')">
+					<img class="icon"
+						src="../img/icon/admin.png" />
+					<div class="title">考勤</div>
+				</div>
+				
+				<div class="shortcut" onclick="Win10.openUrl('../Activity_time/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>考勤列表')">
+					<img class="icon"
+						src="../img/icon/admin.png" />
+					<div class="title">时间安排</div>
+				</div>
 
 			</div>
         <div id="win10-desktop-scene"></div>

@@ -7,16 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import entity.Activity_college;
-import service.Activity_college_Service;
+import entity.Activity_checkwork;
+import service.Activity_checkwork_Service;
 import utils.SearchInfo;
 
 @Controller
-@RequestMapping("Activity_college")
-public class Activity_college_Controller extends Basic_Controller<Activity_college>{
-@Resource(name="Activity_college_ServiceImpl")
-Activity_college_Service service;
+@RequestMapping("Activity_checkwork")
+public class Activity_checkwork_Controller extends Basic_Controller<Activity_checkwork>{
+@Resource(name="Activity_checkwork_ServiceImpl")
+Activity_checkwork_Service service;
 
+Activity_checkwork ac;
 
 @Override
 	public void index(SearchInfo info, ModelMap m, HttpServletRequest req) throws Exception {
@@ -28,14 +29,11 @@ Activity_college_Service service;
 @Override
 	public String add(ModelMap m, HttpServletRequest req) throws Exception {
 		m.put("sublist", service.select(new SearchInfo()));
+		m.put("check1",ac.check1s);
+		m.put("check2",ac.check2s);
+		m.put("check3",ac.check3s);
 		return super.add(m, req);
 	}
-@Override
-	public String addid(ModelMap m, HttpServletRequest req, int school_id) throws Exception {
-	    m.put("sublist", service.select(new SearchInfo()));
-	    m.put("schoolid", school_id);
-		return super.addid(m, req, school_id);
-	}    
    @Override
 	public String edit(int id, ModelMap m, HttpServletRequest req) throws Exception {
 		m.put("subinfo", service.selectById(id).get(0));

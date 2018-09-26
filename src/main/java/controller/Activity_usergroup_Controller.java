@@ -116,11 +116,25 @@ public @ResponseBody JsonInfo myinsert_json(Activity_usergroup o, ModelMap m, Ht
     Activity a = new Activity();
     a.setGroup_id(","+group_id+"");
     a.setId(id);
-    System.out.println(a.getGroup_id());
     service.updateids(a);
+    String ids = o.getIds();
+    a.setIds(ids);
+    a.setGroup_id2(group_id);
+    service.updateuserid(a);
 	return new JsonInfo(1, "");
 }
-   
+   @Override
+	public JsonInfo update_json(Activity_usergroup o, ModelMap m, HttpServletRequest req) throws Exception {
+	    Activity a = new Activity();
+	    int group_id = Integer.valueOf(req.getParameter("id")); 
+	    a.setId(group_id);
+	    String ids = o.getIds();
+	    a.setIds(ids);
+	    a.setGroup_id2(group_id);
+	    service.updateuserid(a);
+	    service.updateuseridto0(a);
+		return super.update_json(o, m, req);
+	}
    @Override
 	public String edit(int id, ModelMap m, HttpServletRequest req) throws Exception {
 		m.put("subinfo", service.selectById(id).get(0));
@@ -134,13 +148,12 @@ public @ResponseBody JsonInfo myinsert_json(Activity_usergroup o, ModelMap m, Ht
    
     @RequestMapping("adduser")
     public String select(ModelMap m,SearchInfo_3 info3,SearchInfo info,int id){
+    	m.put("id",id);
 		String ids = service.selectAllids().get(0).getIds();
-		info.setWhere(" where u.id in ("+ids+")");
+		info.setWhere(" where u.id in ("+ids+") and u.group_id="+id+"");
         info3.setWhere(" where u.id not in ("+ids+")");
 		m.put("user1", service.selectnotids(info3));
 		m.put("user2", service.selectids(info));
-		
-		
     	return "Activity_usergroup/userlist";
     }
     @RequestMapping("userlist")

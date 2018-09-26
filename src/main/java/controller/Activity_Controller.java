@@ -17,6 +17,7 @@ public class Activity_Controller extends Basic_Controller<Activity>{
 @Resource(name="Activity_ServiceImpl")
 Activity_Service service;
 
+Activity a;
 
 
 @Override
@@ -30,6 +31,7 @@ Activity_Service service;
 @Override
 	public String add(ModelMap m, HttpServletRequest req) throws Exception {
 		m.put("sublist", service.select(new SearchInfo()));
+		m.put("types", a.types);
 		return super.add(m, req);
 	}
    @Override
@@ -42,5 +44,14 @@ Activity_Service service;
 	public String delete(int id, ModelMap m, HttpServletRequest req) throws Exception {
 	   return super.delete(id, m, req);
 	}
+   @RequestMapping("activityinfo")
+   public String activityinfo(SearchInfo info,int id, ModelMap m, HttpServletRequest req) {
+	   m.put("time",service.timeinfo(id).get(0));
+	   m.put("group", service.groupinfo(id));
+	   m.put("user",service.userinfo());
+	   return "Activity/info";
+   }
+   
+   
 
 }

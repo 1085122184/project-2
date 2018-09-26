@@ -13,4 +13,6 @@ public interface Activity_usergroup_Service extends Basic_Service<Activity_userg
 	public List<Activity_user> selectnotids(SearchInfo_3 info3);
 	public List<Activity_usergroup> selectAllids();
 	public void updateids(Activity a);
+	public void updateuserid(Activity a);
+	public void updateuseridto0(Activity a);
 }

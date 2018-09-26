@@ -30,6 +30,14 @@
     border: 1px solid white;
     height: auto;
     }
+.btn-group.bootstrap-select.select.one{
+width: 34%
+}
+.search{
+position: absolute;
+left: 230px;
+top: 15px;
+}
 </style>
 </head>
 <body id="skin-blur-ocean">
@@ -47,7 +55,7 @@ function openwin(url,w,h) {
 		    });
 		  }
 function fresh() {
-	location.replace(location.href);
+	location.href="../Activity_time/index?activity_id="+${requestScope.activity_id};
 }
 function del(id) {
 	layer.confirm('确认删除吗？删除后不能恢复，谨慎操作',function(){
@@ -55,7 +63,7 @@ function del(id) {
 	          //几个参数需要注意一下
 	              type: "POST",//方法类型
 	              dataType: "json",//预期服务器返回的数据类型
-	              url: "../Activity_usergroup/delete_json?id="+id,//url
+	              url: "../Activity_time/delete_json?id="+id,//url
 	              success: function (result) {
 	            	  fresh();
 	              },
@@ -69,43 +77,56 @@ function del(id) {
 	<!-- Table Striped -->
 	<div class="block-area" id="tableStriped">
 		<div class="table-responsive overflow">
-		<button class="btn btn-sm btn-alt m-r-5" type="button"
-				onclick="openwin('../Activity_usergroup/add','610','400')">新增</button>
-			<div>
-			<c:if test="${fn:length(requestScope.list)==0}">暂无数据</c:if>
-			</div>
-			<c:if test="${fn:length(requestScope.list)!=0}">
+          <form action="../Activity_time/index" class="activity" method="post">
+			<label>当前活动</label> <select name="activity_id" class="select one" id="select"
+				style="display: inline;">
+				<c:forEach items="${requestScope.activity}" var="r" varStatus="v">
+					<option value="${r.id}">${r.name}</option>
+				</c:forEach>
+			</select>
+            <button class="btn btn-sm btn-alt m-r-5 search" type="submit">查询</button>
+         </form>
+			<button class="btn btn-sm btn-alt m-r-5" type="button"
+				onclick="openwin('../Activity_time/add?activity_id=${requestScope.activity_id}','660','385')">新增</button>
+				
+				
+			<c:if test="${fn:length(requestScope.list1)==0}"><div style="height: 100px">暂无时间安排</div></c:if>
+			<c:if test="${fn:length(requestScope.list1)!=0}">
 			<table class="tile table table-bordered table-striped"
 				style="width: 100%">
 				<thead>
 					<tr>
-					    <th>添加人</th>
-					    <th>创建时间</th>
-						<th>小组名称</th>
-						<th>作品</th>
-						<th>平均分数</th>
-						<th>小组人数</th>
+						<th>时间信息</th>
+						<th>time1</th>
+						<th>time2</th>
+						<th>time3</th>
+						<th>time4</th>
+						<th>time5</th>
+						<th>time6</th>
+						<th>地点信息</th>
 						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${requestScope.list}" var="r">
-						<tr>
-						    <td>${r.operator_id}</td>
-						    <td>${r.creatdate}</td>
-							<td>${r.name}</td>
-							<td>${r.project}</td>
-							<td>${r.point1}</td>
-							<td>${fn:length(r.idlist)}</td>
+					<c:forEach items="${requestScope.list1}" var="r">
+					<tr>
+							<td>${r.dateinfo}</td>
+							<td>${r.time1}</td>
+							<td>${r.time2}</td>
+							<td>${r.time3}</td>
+							<td>${r.time4}</td>
+							<td>${r.time5}</td>
+							<td>${r.time6}</td>
+							<td>${r.roominfo}</td>
 							<td><a class="glyphicon glyphicon-pencil"
 								href="javascript:;"
-								onclick="openwin('../Activity_usergroup/edit?id=${r.id}','610','400')">修改</a>
+								onclick="openwin('../Activity_time/edit?id=${r.id}','500','300')">修改</a>
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
 								onclick="del(${r.id})">删除</a>
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
-								onclick="openwin('../Activity_usergroup/adduser?id=${r.id}','610','400')">添加组员</a></td>
-						</tr>
-					</c:forEach>
+								onclick="openwin('../Activity_college/addid?school_id=${r.id}','350','200')">新增学院</a></td>
+					</tr>
+					 </c:forEach>
 				</tbody>
 			</table>
 			</c:if>
@@ -132,17 +153,21 @@ function del(id) {
 	<script src="../admin-static/js/select.min.js"></script>
 	<!-- Custom Select -->
 		<script type="text/javascript">
+		
 		layui.use('laypage', function(){
 			  var laypage = layui.laypage;
+			  
 			  //执行一个laypage实例
 			  laypage.render({ 
+				  
 				    elem: 'demo1'
-				    ,count: ${requestScope.count}
-			  		,curr: ${requestScope.page}
+				    ,count: ${requestScope.count} 
+			  		,curr: ${requestScope.page} 
+			  		,limit:15
 				    ,layout: [ 'prev', 'page', 'next', 'count',, 'skip']
 				    ,jump: function(obj,first){
-				      if(!first){
-				    	  location.href="../Activity_usergroup/index?pageno="+obj.curr;
+				      if(!first){  	  
+				    	  location.href="../Activity_time/index?pageno="+obj.curr+"&activity_id="+${requestScope.activity_id};
 				        } 
 				    }
 				  });
@@ -150,8 +175,10 @@ function del(id) {
 		$(function() {
 			if(${fn:length(requestScope.list)==0&&requestScope.count!=0}){ 
 				 var pageno = ${requestScope.page-1} 
-				 location.href="../Activity_usergroup/index?pageno="+pageno;
+				 location.href="../Activity_time/index?pageno="+pageno;
 			}
+			$(".filter-option.pull-left").text('${requestScope.activity_name.name}');
+			$("#select").val(${requestScope.activity_id});
 		});
 		
 		

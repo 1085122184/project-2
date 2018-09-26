@@ -5,8 +5,7 @@ import java.io.Serializable;
 public class Activity_time implements Serializable{
 	int id;
 	int activity_id;
-	String start_date;
-	String end_date;
+	String dateinfo;
 	String time1;
 	String time2;
 	String time3;
@@ -17,6 +16,12 @@ public class Activity_time implements Serializable{
 	int operator_id;
 	int status;
 	String comments;
+	public static String[] statuses = {"ÔÝ¶¨","È·¶¨"};
+	
+	public String getStatus_name() {
+		return statuses[status];
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -30,17 +35,11 @@ public class Activity_time implements Serializable{
 		this.activity_id = activity_id;
 	}
 	
-	public String getStart_date() {
-		return start_date;
+	public String getDateinfo() {
+		return dateinfo;
 	}
-	public void setStart_date(String start_date) {
-		this.start_date = start_date;
-	}
-	public String getEnd_date() {
-		return end_date;
-	}
-	public void setEnd_date(String end_date) {
-		this.end_date = end_date;
+	public void setDateinfo(String dateinfo) {
+		this.dateinfo = dateinfo;
 	}
 	public String getTime1() {
 		return time1;
