@@ -1865,7 +1865,7 @@ a.list-group-item.active > .badge,
     }
 
     #skin-blur-violate {
-        background-image: url(../img/body/violate.jpg);
+         background:url(../img/body/violate.jpg) center fixed;background-size:100%;
     }
 
     #skin-blur-lights {
@@ -1897,14 +1897,14 @@ a.list-group-item.active > .badge,
     }
     
     #skin-blur-ocean {
-    background:url(../img/body/beijing2.jpg) center fixed;background-size:100%;
+   background:url(../img/body/violate.jpg) center fixed;background-size:100%;
     }
     #skin-blur-socean {
     background:url(../img/body/beijing.jpg) center fixed;background-size:100%;
     }
     
     #skin-blur-black {
-    background:url(../img/body/beijing2.jpg) center fixed;background-size:100%;
+     background:url(../img/body/violate.jpg) center fixed;background-size:100%;
     }
 
     #skin-blur-kiwi {
@@ -2066,7 +2066,7 @@ a.list-group-item.active > .badge,
     }
     
    #skin-blur-ocean {
-         background:url(../img/body/beijing2.jpg) center fixed;background-size:100%;
+   background:url(../img/body/violate.jpg) center fixed;background-size:100%;
     }
     #skin-blur-socean {
         background:url(../img/body/beijing.jpg) center fixed;background-size:100%;
@@ -2078,7 +2078,7 @@ a.list-group-item.active > .badge,
     }
     
     #skin-blur-black {
-    background:url(../img/body/beijing2.jpg) center fixed;background-size:100%;
+     background:url(../img/body/violate.jpg) center fixed;
     }
 
     #skin-blur-kiwi {

@@ -96,15 +96,7 @@ width: 52px
 					</div>
                  <div class="clearfix"></div>
 			     <br>
-			       <div class="col-md-4 m-b-10" style="margin-left: 90px">
-				     <label style="text-align: right;">报名活动</label>
-                     <select name="activity_id" class="select sex" id="one" style="display: inline;">
-                       <c:forEach items="${requestScope.activity}" var="r">
-                         <option value="${r.id}">${r.name}</option>
-                       </c:forEach>
-                     </select>
-                   </div>
-                   <div class="col-md-12" style="margin-left: 90px">
+			      <div class="col-md-12" style="margin-left: 90px">
 					 <label style="text-align: right;">备注</label>
 					 <textarea id="one" name="comments" class="form-control m-b-10" placeholder="说点什么吧" style="width: 301px;margin-left: 55px;margin-top: -26px">${requestScope.subinfo.comments}</textarea>
 		    	   </div>
@@ -113,6 +105,7 @@ width: 52px
               <div class="tab-pane" id="profile-b" style="overflow:auto;height: 271px">
                  <form class="form1" autocomplete="off">
                    <input type="hidden" class="form-control ids" name="ids">
+                   <input type="hidden" name="activity_id" value="${requestScope.activity_id}">
 					<table class="tile table table-bordered table-striped"
 						style="width: 100%">
 						<thead>
@@ -229,7 +222,7 @@ width: 52px
               	        	  $(".college").append("<option value='"+item.id+"' style='display:none'>"+item.name+"</option>");
               	        	  $(".btn-group.bootstrap-select.select.college ul").append("<li rel='"+val+"' class='selected'><a tabindex='0' class style><span class='text' id='s'>"+item.name+"</span><i class='fa fa-check check-mark'></i></a></li>");}	
               	          else{$(".btn-group.bootstrap-select.select.college ul").append("<li rel='"+val+"'><a tabindex='0' class style><span class='text' id='s'>"+item.name+"</span><i class='fa fa-check check-mark'></i></a></li>");
-              	               $(".college").append("<option value='"+item.id+"' style='display:none'>"+item.name+"</option>")
+              	              $(".college").append("<option value='"+item.id+"' style='display:none'>"+item.name+"</option>")
               	          }
               	        })
                       },

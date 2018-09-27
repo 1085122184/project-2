@@ -60,13 +60,34 @@ Activity_user user;
 //	    info.setWhere(where);
 //	    m.put("select",select);
 //	    m.put("txt",select==0?"'"+txt+"'":txt);
-		m.put("count", service.count(info));
-		m.put("page",info.getPageno());
+	    if(req.getParameter("school_id")==null) {
+	    	m.put("school", sservice.selectAll());
+			m.put("count", service.countByid(info));
+			m.put("page",info.getPageno());
+			m.put("list1", service.selectByActivityId(info));
+			m.put("activity_id", info.getNowid());
+	    }else {
+	    	int school_id = Integer.valueOf(req.getParameter("school_id"));
+		    int college_id = Integer.valueOf(req.getParameter("college_id"));
+		   
+		    m.put("svalue", school_id);
+		    m.put("sname", sservice.selectById(school_id).get(0));
+		    m.put("cvalue", college_id);
+		    m.put("cname", scervice.selectById(college_id).get(0));
+		    
+		    info.setWhere(" and u.school_id="+school_id+" and u.college_id="+college_id+"");
+		    m.put("school", sservice.selectAll());
+			m.put("count", service.countByid(info));
+			m.put("page",info.getPageno());
+			m.put("list1", service.selectByActivityId(info));
+			m.put("activity_id", info.getNowid());
+	    }
 		super.index(info, m, req);
 	}
 
 @Override
 	public String add(ModelMap m, HttpServletRequest req) throws Exception {
+	    m.put("activity_id",req.getParameter("activity_id"));
 	    m.put("school",sservice.selectAll());
 		m.put("sublist", service.select(new SearchInfo()));
 		m.put("sex", user.sexs);
@@ -86,15 +107,12 @@ Activity_user user;
 		m.put("subinfo", service.selectById(id).get(0));
 		return super.edit(id, m, req);
 	}
-
    @Override
 	public String delete(int id, ModelMap m, HttpServletRequest req) throws Exception {
 	   return super.delete(id, m, req);
 	}
-   
     @RequestMapping("select")
-    public @ResponseBody List<Activity_college> select(int school_id){
-        
+    public @ResponseBody List<Activity_college> select(int school_id,ModelMap m){
     	return scervice.selectBysid(school_id);
     }
 

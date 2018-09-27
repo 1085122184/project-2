@@ -5,6 +5,16 @@ public class SearchInfo {
 	private Integer pageno = 1;
 	private String limit = " limit " + (pageno - 1) * max + "," + max;
     private Integer select;
+    private Integer nowid;
+    
+    
+	public Integer getNowid() {
+		return nowid;
+	}
+
+	public void setNowid(Integer nowid) {
+		this.nowid = nowid;
+	}
 
 	public void setMax(int max) {
 		this.max = max;

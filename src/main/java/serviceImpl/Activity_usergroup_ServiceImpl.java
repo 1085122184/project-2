@@ -48,4 +48,19 @@ public void updateuseridto0(Activity a) {
 	
 }
 
+public List<Activity_usergroup> selectByActivity_id(SearchInfo info) {
+	// TODO Auto-generated method stub
+	return mapper.selectByActivity_id(info);
+}
+
+public int countByid(SearchInfo info) {
+	// TODO Auto-generated method stub
+	return mapper.countByid(info);
+}
+
+public void updateuseridto02(Activity a) {
+	mapper.updateuseridto02(a);
+	
+}
+
 }

@@ -123,13 +123,9 @@ function del(id) {
 							<td>${r.type_name}</td>
 							<td>${fn:length(r.groupidlist)-1}</td>
 							<td>${r.attention}</td>
-							<td><a class="glyphicon glyphicon-pencil"
-								href="javascript:;"
-								onclick="openwin('../Activity_time/add?activity_id=${r.id}','660','385')">时间安排</a>
-								
-								
+							<td>
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
-								onclick="openwin('../Activity/activityinfo?id=${r.id}','760','485')     ">查看</a>
+								onclick="openwin('../Activity/activityinfo?id=${r.id}','760','485')">查看</a>
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
 								onclick="del(${r.id})">删除</a></td>
 						</tr>

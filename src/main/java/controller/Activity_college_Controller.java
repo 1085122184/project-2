@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import entity.Activity_college;
 import service.Activity_college_Service;
+import service.Activity_school_Service;
 import utils.SearchInfo;
 
 @Controller
@@ -16,12 +17,37 @@ import utils.SearchInfo;
 public class Activity_college_Controller extends Basic_Controller<Activity_college>{
 @Resource(name="Activity_college_ServiceImpl")
 Activity_college_Service service;
-
+@Resource(name="Activity_school_ServiceImpl")
+Activity_school_Service aservice;
 
 @Override
 	public void index(SearchInfo info, ModelMap m, HttpServletRequest req) throws Exception {
-		m.put("count", service.count(info));
-		m.put("page",info.getPageno());
+	m.put("page", info.getPageno());
+	if(info.getNowid()==null) {
+		int nowid = aservice.selectMaxId();
+		info.setNowid(nowid);
+		m.put("list1", service.selectBySchoolId(info));
+		m.put("count", service.countByid(info));
+		m.put("school_id",nowid); //记录当前id
+		m.put("school_name", aservice.selectById(nowid).get(0));
+	}
+	else {
+		m.put("list1", service.selectBySchoolId(info));
+		m.put("count", service.countByid(info));
+		m.put("school_id",info.getNowid()); //记录当前id
+		m.put("school_name", aservice.selectById(info.getNowid()).get(0));
+	}
+	    m.put("school",aservice.selectDesc());
+	
+	
+	
+	
+	
+	
+	
+//	
+//		m.put("count", service.count(info));
+//		m.put("page",info.getPageno());
 		super.index(info, m, req);
 	}
 

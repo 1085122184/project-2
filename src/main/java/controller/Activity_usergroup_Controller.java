@@ -66,8 +66,10 @@ Activity_usergroup usergroup;
 //	    m.put("select",select);
 //	    m.put("txt",select==0?"'"+txt+"'":txt);
 	   
-		m.put("count", service.count(info));
+		m.put("count", service.countByid(info));
 		m.put("page",info.getPageno());
+		m.put("list1", service.selectByActivity_id(info));
+		m.put("activity_id", info.getNowid());
 		super.index(info, m, req);
 	}
 @Override
@@ -78,14 +80,20 @@ Activity_usergroup usergroup;
 	}
 @Override
 	public String add(ModelMap m, HttpServletRequest req) throws Exception {
+	
+	    int activity_id=Integer.valueOf(req.getParameter("activity_id"));
 	    if(service.select(new SearchInfo()).size()==0) {
-	    	m.put("user1",uservice.select(new SearchInfo()));
+	    	SearchInfo info = new SearchInfo();
+	    	info.setWhere("where activity_id="+activity_id+"");
+	    	m.put("user1",service.selectids(info));
+	    	info.setWhere("where activity_id<>"+activity_id+"");
+	    	m.put("user2", service.selectids(info));
 	    }else {
 	    SearchInfo_3 info3 = new SearchInfo_3();
 	    SearchInfo info = new SearchInfo();
 	    String ids = service.selectAllids().get(0).getIds();
-		info.setWhere(" where u.id in ("+ids+")");
-        info3.setWhere(" where u.id not in ("+ids+")");
+		info.setWhere(" where u.id in ("+ids+") and activity_id="+activity_id+"");
+        info3.setWhere(" where u.id not in ("+ids+") and activity_id="+activity_id+"");
 		m.put("user1", service.selectnotids(info3));
 		m.put("user2", service.selectids(info));
 	    }
@@ -94,6 +102,7 @@ Activity_usergroup usergroup;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date = sdf.format(d);
         m.put("date",date);
+        m.put("activity_id", activity_id);
 		return super.add(m, req);
 	}
 //@Override
@@ -131,8 +140,14 @@ public @ResponseBody JsonInfo myinsert_json(Activity_usergroup o, ModelMap m, Ht
 	    String ids = o.getIds();
 	    a.setIds(ids);
 	    a.setGroup_id2(group_id);
-	    service.updateuserid(a);
-	    service.updateuseridto0(a);
+	    if(ids!="") {
+	    	 service.updateuserid(a);
+	    	 service.updateuseridto0(a);
+	    }else {
+	    	service.updateuseridto02(a);
+	    	
+	    }
+	    
 		return super.update_json(o, m, req);
 	}
    @Override
@@ -147,13 +162,24 @@ public @ResponseBody JsonInfo myinsert_json(Activity_usergroup o, ModelMap m, Ht
 	}
    
     @RequestMapping("adduser")
-    public String select(ModelMap m,SearchInfo_3 info3,SearchInfo info,int id){
+    public String select(ModelMap m,SearchInfo_3 info3,SearchInfo info,int id,HttpServletRequest req){
+    	int activity_id=Integer.valueOf(req.getParameter("activity_id"));
     	m.put("id",id);
 		String ids = service.selectAllids().get(0).getIds();
-		info.setWhere(" where u.id in ("+ids+") and u.group_id="+id+"");
-        info3.setWhere(" where u.id not in ("+ids+")");
-		m.put("user1", service.selectnotids(info3));
-		m.put("user2", service.selectids(info));
+		System.out.println(ids+"");
+		if(ids!=""&&ids.length()!=0) {
+			info.setWhere(" where u.id in ("+ids+") and u.group_id="+id+" and activity_id="+activity_id+"");//and activity_id="+id+"
+	        info3.setWhere(" where u.id not in ("+ids+") and activity_id="+activity_id+"");
+			m.put("user1", service.selectnotids(info3));
+			m.put("user2", service.selectids(info));
+		}else{
+			System.out.println(123);
+			info.setWhere(" where u.group_id="+id+" and activity_id="+activity_id+"");//and activity_id="+id+"
+	        info3.setWhere(" where activity_id="+activity_id+"");
+			m.put("user1", service.selectnotids(info3));
+			m.put("user2", service.selectids(info));
+		}
+		
     	return "Activity_usergroup/userlist";
     }
     @RequestMapping("userlist")
@@ -162,5 +188,27 @@ public @ResponseBody JsonInfo myinsert_json(Activity_usergroup o, ModelMap m, Ht
 	    m.put("page", info3.getPageno());
 		m.put("user", uservice.select_3(info3));
     }
+    @RequestMapping("allindex")
+    public String allindex(SearchInfo info, ModelMap m, HttpServletRequest req) {
+    	if(info.getNowid()==null) {
+    		int nowid = aservice.selectMaxId();
+    		info.setNowid(nowid);
+    		m.put("activity_id",nowid); //记录当前id
+    		m.put("activity_name", aservice.selectById(nowid).get(0));
+    	}
+    	else {
+    		m.put("activity_id",info.getNowid()); //记录当前id
+    		m.put("activity_name", aservice.selectById(info.getNowid()).get(0));
+    	}
+    	
+    	
+    	
+    	m.put("myid",req.getParameter("myid"));//iframe按钮标记
+    	m.put("activity", aservice.selectDesc());
+    	
+    	return "Activity_usergroup/allindex";
+    }
+    
+    
 
 }

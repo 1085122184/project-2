@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import entity.Activity_user;
 import mapper.Activity_user_Mapper;
 import service.Activity_user_Service;
+import utils.SearchInfo;
 import utils.SearchInfo_3;
 
 @Service("Activity_user_ServiceImpl")
@@ -22,6 +23,16 @@ public List<Activity_user> select_3(SearchInfo_3 info3) {
 public List<Activity_user> selectAll() {
 	// TODO Auto-generated method stub
 	return mapper.selectAll();
+}
+
+public List<Activity_user> selectByActivityId(SearchInfo info) {
+	// TODO Auto-generated method stub
+	return mapper.selectByActivityId(info);
+}
+
+public int countByid(SearchInfo info) {
+	// TODO Auto-generated method stub
+	return mapper.countByid(info);
 }
 
 }

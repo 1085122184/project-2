@@ -6,6 +6,9 @@ public class Activity_user implements Serializable{
 
 	
 	private int id;
+	private int cid;
+	private int sid;
+	private int activity_id;
 	private String name;
 	private String niki;
 	private String pass;
@@ -69,6 +72,24 @@ public class Activity_user implements Serializable{
 	}
 	
 	
+	public int getCid() {
+		return cid;
+	}
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+	public int getSid() {
+		return sid;
+	}
+	public void setSid(int sid) {
+		this.sid = sid;
+	}
+	public int getActivity_id() {
+		return activity_id;
+	}
+	public void setActivity_id(int activity_id) {
+		this.activity_id = activity_id;
+	}
 	public int getId() {
 		return id;
 	}

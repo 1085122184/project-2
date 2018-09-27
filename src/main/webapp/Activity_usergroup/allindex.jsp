@@ -59,9 +59,6 @@ function openwin(url,w,h) {
 		    });
 		  }
 function fresh() {
-	location.href="../Activity_time/index?activity_id="+${requestScope.activity_id};
-}
-function delfresh() {
 	location.replace(location.href);
 }
 function del(id) {
@@ -70,9 +67,9 @@ function del(id) {
 	          //几个参数需要注意一下
 	              type: "POST",//方法类型
 	              dataType: "json",//预期服务器返回的数据类型
-	              url: "../Activity_time/delete_json?id="+id,//url
+	              url: "../Activity_usergroup/delete_json?id="+id,//url
 	              success: function (result) {
-	            	  delfresh();
+	            	  fresh();
 	              },
 	          });
 	});
@@ -83,59 +80,26 @@ function del(id) {
 
 	<!-- Table Striped -->
 	<div class="block-area" id="tableStriped">
-		<div class="table-responsive overflow">
- 			<label>当前活动</label> <select class="select one" id="select"
+		<div class="table-responsive">
+ 			<label>当前活动</label> <select class="select one" id="select" myid="0"
 				style="display: inline;">
 				<c:forEach items="${requestScope.activity}" var="r" varStatus="v">
-					<option value="${r.id}">${r.name}</option>
+					<option value="${r.id}" >${r.name}</option>
 				</c:forEach>
 			</select>
-			<button class="btn btn-sm btn-alt m-r-5" type="button" style="position: absolute;left: 250px"
-				onclick="openwin('../Activity_time/add?activity_id=${requestScope.activity_id}','660','385')">新增</button>
-				
-				
-			<c:if test="${fn:length(requestScope.list1)==0}"><div style="height: 100px">暂无时间安排</div></c:if>
-			<c:if test="${fn:length(requestScope.list1)!=0}">
-			<table class="tile table table-bordered table-striped"
-				style="width: 100%">
-				<thead>
-					<tr>
-						<th>时间信息</th>
-						<th>time1</th>
-						<th>time2</th>
-						<th>time3</th>
-						<th>time4</th>
-						<th>time5</th>
-						<th>time6</th>
-						<th>地点信息</th>
-						<th>操作</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${requestScope.list1}" var="r">
-					<tr>
-							<td>${r.dateinfo}</td>
-							<td>${r.time1}</td>
-							<td>${r.time2}</td>
-							<td>${r.time3}</td>
-							<td>${r.time4}</td>
-							<td>${r.time5}</td>
-							<td>${r.time6}</td>
-							<td>${r.roominfo}</td>
-							<td><a class="glyphicon glyphicon-pencil"
-								href="javascript:;"
-								onclick="openwin('../Activity_time/edit?id=${r.id}','500','300')">修改</a>
-								<a class="glyphicon glyphicon-trash" href="javascript:;"
-								onclick="del(${r.id})">删除</a>
-								<a class="glyphicon glyphicon-trash" href="javascript:;"
-								onclick="openwin('../Activity_college/addid?school_id=${r.id}','350','200')">新增学院</a></td>
-					</tr>
-					 </c:forEach>
-				</tbody>
-			</table>
-			</c:if>
-			<div id="demo1" class="col-md-4 m-b-10"></div>
+			<div style="margin-top: 20px">
+			<input type="button" class="form-control input-sm m-b-10" value="学生信息" style="width: 50%" id="user">
+			<input type="button" class="form-control input-sm m-b-10" value="小组信息" id="group" style="width: 50%;margin-left:50%;margin-top: -30px">
+			</div>
 		</div>
+	</div>
+	<div style="height: calc(100% - 98px);">
+	 <c:if test="${requestScope.myid==0}">
+			<iframe src="../Activity_user/index?nowid=${requestScope.activity_id}" style="height: 100%;width: 100%;border: 0" id="iframe"></iframe>
+	 </c:if>
+	 <c:if test="${requestScope.myid==1}">
+			<iframe src="../Activity_usergroup/index?nowid=${requestScope.activity_id}" style="height: 100%;width: 100%;border: 0" id="iframe"></iframe>
+	 </c:if>
 	</div>
 	<!-- Javascript Libraries -->
 	<!-- jQuery -->
@@ -158,35 +122,35 @@ function del(id) {
 	<!-- Custom Select -->
 		<script type="text/javascript">
 		
-		layui.use('laypage', function(){
-			  var laypage = layui.laypage;
-			  
-			  //执行一个laypage实例
-			  laypage.render({ 
-				  
-				    elem: 'demo1'
-				    ,count: ${requestScope.count} 
-			  		,curr: ${requestScope.page} 
-			  		,limit:15
-				    ,layout: [ 'prev', 'page', 'next', 'count',, 'skip']
-				    ,jump: function(obj,first){
-				      if(!first){  	  
-				    	  location.href="../Activity_time/index?pageno="+obj.curr+"&activity_id="+${requestScope.activity_id};
-				        } 
-				    }
-				  });
-			});
 		$(function() {
 			$("#select").on("change",function(){
-				location.href="../Activity_time/index?activity_id="+$(this).val()
+				location.href="../Activity_usergroup/allindex?nowid="+$(this).val()+"&myid="+$(this).attr("myid")
 			})
 			
-			if(${fn:length(requestScope.list1)==0&&requestScope.count!=0}){ 
-				 var pageno = ${requestScope.page-1} 
-				 location.href="../Activity_time/index?pageno="+pageno+"&activity_id="+${requestScope.activity_id};
-			}
+			$("#user").on("click",function(){
+				$("#user").css("border","1px solid rgba(255, 255, 255, 1)");
+				$("#group").css("border","1px solid rgba(255, 255, 255, 0.3)");
+				$("#iframe").attr("src","../Activity_user/index?nowid=${requestScope.activity_id}");
+				$("#select").attr("myid","0");
+			})
+			$("#group").on("click",function(){
+				$("#user").css("border","1px solid rgba(255, 255, 255, 0.3)");
+				$("#group").css("border","1px solid rgba(255, 255, 255, 1)");
+				$("#iframe").attr("src","../Activity_usergroup/index?nowid=${requestScope.activity_id}");
+				$("#select").attr("myid","1");
+			})
+			
 			$(".filter-option.pull-left").text('${requestScope.activity_name.name}');
 			$("#select").val(${requestScope.activity_id});
+			$("#select").attr("myid","${requestScope.myid}")
+			if(${requestScope.myid}==0){
+				$("#user").css("border","1px solid rgba(255, 255, 255, 1)");
+			}
+			if(${requestScope.myid}==1){
+				$("#group").css("border","1px solid rgba(255, 255, 255, 1)");
+			}
+			
+			
 		});
 		
 		

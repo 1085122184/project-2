@@ -15,4 +15,7 @@ public interface Activity_usergroup_Service extends Basic_Service<Activity_userg
 	public void updateids(Activity a);
 	public void updateuserid(Activity a);
 	public void updateuseridto0(Activity a);
+	public List<Activity_usergroup> selectByActivity_id(SearchInfo info);
+	public int countByid(SearchInfo info);
+	public void updateuseridto02(Activity a);
 }

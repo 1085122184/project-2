@@ -18,6 +18,16 @@ public List<Activity_school> selectAll() {
 	return mapper.selectAll();
 }
 
+public int selectMaxId() {
+	// TODO Auto-generated method stub
+	return mapper.selectMaxId();
+}
+
+public List<Activity_school> selectDesc() {
+	// TODO Auto-generated method stub
+	return mapper.selectDesc();
+}
+
 
 
 

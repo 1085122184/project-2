@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import entity.Activity_college;
 import entity.Activity_user;
 import utils.SearchInfo;
 import utils.SearchInfo_3;
@@ -20,10 +21,16 @@ public interface Activity_user_Mapper extends BaicsMapper{
 	@Select("select u.*,s.name sname,c.name cname from activity_user u left join activity_school s on s.id=u.school_id left join activity_college c on c.id=u.college_id")
 	public List<Activity_user> select_3(SearchInfo_3 info3);
     
-    @Select("select * from activity_user where id=#{id}")
+    @Select("select u.*,s.name sname,s.id sid,c.name cname,c.id cid from activity_user u left join activity_school s on s.id=u.school_id left join activity_college c on c.id=u.college_id where u.id=#{id}")
 	public List<Activity_user> selectById(int id);
+	
+	@Select("select u.*,s.name sname,c.name cname from activity_user u left join activity_school s on s.id=u.school_id left join activity_college c on c.id=u.college_id where activity_id=#{nowid} ${where} ${limit}")
+	public List<Activity_user> selectByActivityId(SearchInfo info);
+	
+	@Select("select count(id) count from activity_user  where activity_id=#{nowid}")
+	public int countByid(SearchInfo info);
     
-	@Insert("insert into activity_user(niki,pass,name,sex,type,tel,qq,classinfo,ylevel,glevel,slevel,school_id,college_id,status,info,creatdate,operator_id,comments) values(#{niki},123,#{name},#{sex},#{type},#{tel},#{qq},#{classinfo},#{ylevel},#{glevel},#{slevel},#{school_id},#{college_id},#{status},#{info},#{creatdate},#{operator_id},#{comments})")
+	@Insert("insert into activity_user(niki,pass,name,sex,type,tel,qq,classinfo,ylevel,glevel,slevel,school_id,college_id,status,info,creatdate,operator_id,comments,activity_id) values(#{niki},123,#{name},#{sex},#{type},#{tel},#{qq},#{classinfo},#{ylevel},#{glevel},#{slevel},#{school_id},#{college_id},#{status},#{info},#{creatdate},#{operator_id},#{comments},#{activity_id})")
 	public void insert(Activity_user au);
 	
 	@Update("update activity_user set niki=#{niki},name=#{name},qq=#{qq},classinfo=#{classinfo},type=#{type},tel=#{tel},comments=#{comments} where id=#{id}")
@@ -43,4 +50,6 @@ public interface Activity_user_Mapper extends BaicsMapper{
 	
 	@Select("select * from activity_user")
 	public List<Activity_user> selectAll();
+	
+	
 }

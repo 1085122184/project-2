@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import entity.Activity_college;
 import mapper.Activity_college_Mapper;
 import service.Activity_college_Service;
+import utils.SearchInfo;
 
 @Service("Activity_college_ServiceImpl")
 public class Activity_college_ServiceImpl extends Basic_ServiceImpl<Activity_college> implements Activity_college_Service{
@@ -18,10 +19,21 @@ public List<Activity_college> selectAll() {
 	return mapper.selectAll();
 }
 
+public List<Activity_college> selectBySchoolId(SearchInfo info) {
+	// TODO Auto-generated method stub
+	return mapper.selectBySchoolId(info);
+}
+
 public List<Activity_college> selectBysid(int school_id) {
 	// TODO Auto-generated method stub
 	return mapper.selectBysid(school_id);
 }
+
+public int countByid(SearchInfo info) {
+	// TODO Auto-generated method stub
+	return mapper.countByid(info);
+}
+
 
 
 

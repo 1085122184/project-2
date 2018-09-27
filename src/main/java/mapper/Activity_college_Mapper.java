@@ -19,6 +19,12 @@ public interface Activity_college_Mapper extends BaicsMapper{
     
     @Select("select * from activity_college where id=#{id}")
 	public List<Activity_college> selectById(int id);
+	
+	@Select("select * from activity_college where school_id=#{nowid} ${limit}")
+	public List<Activity_college> selectBySchoolId(SearchInfo info);
+	
+	@Select("select count(id) count from activity_college  where school_id=#{nowid}")
+	public int countByid(SearchInfo info);
     
 	@Insert("insert into activity_college(name,school_id) values(#{name},#{school_id})")
 	public void insert(Activity_college ac);

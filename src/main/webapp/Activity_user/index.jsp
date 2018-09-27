@@ -30,6 +30,19 @@
     border: 1px solid white;
     height: auto;
     }
+    
+.btn-group.bootstrap-select.select.school{
+    width: 500px;
+    margin-left: 5px;
+}    
+.dropdown-menu.open{
+overflow: auto!important;
+}
+
+.btn-group.bootstrap-select.select.college{
+    width: 500px;
+}  
+
 </style>
 </head>
 <body id="skin-blur-ocean">
@@ -68,17 +81,32 @@ function del(id) {
 
 	<!-- Table Striped -->
 	<div class="block-area" id="tableStriped">
-		<div class="table-responsive overflow">
+		<div class="table-responsive">
+		<form action="../Activity_user/index" class="form1" method="post">
+		<input type="hidden" name="nowid" value="${requestScope.activity_id}">
+		<label>学校名称</label>
+		    <select class="select school" id="school" name="school_id">
+		    <option value="0">--请选择--</option>
+		      <c:forEach items="${requestScope.school}" var="r">	    
+			    <option value="${r.id}">${r.name}</option>	
+		      </c:forEach>
+			</select>
+		<label id="lcollege" style="margin-left:-345px;margin-top: -25px">学院名称</label>
+		<select name="college_id" id="college" class="select college" style="display: inline;"></select>
 		<button class="btn btn-sm btn-alt m-r-5" type="button"
-				onclick="openwin('../Activity_user/add','610','400')">新增</button>
-			<c:if test="${fn:length(requestScope.list)==0}">暂无数据</c:if>
-			<c:if test="${fn:length(requestScope.list)!=0}">
+				onclick="openwin('../Activity_user/add?activity_id=${requestScope.activity_id}','610','400')">新增</button>
+		<button class="btn btn-sm btn-alt m-r-5" style="position: absolute;left: 443px;top: 15px"><i class="glyphicon glyphicon-search"></i>搜索</button>
+		
+		</form>		
+				
+			<div>
+			<c:if test="${fn:length(requestScope.list1)==0}">暂无数据</c:if>
+			</div>
+			<c:if test="${fn:length(requestScope.list1)!=0}">
 			<table class="tile table table-bordered table-striped"
 				style="width: 100%">
 				<thead>
 					<tr>
-					    <th>添加人</th>
-					    <th>创建时间</th>
 						<th>ID</th>
 						<th>姓名</th>
 						<th>性别</th>
@@ -96,10 +124,8 @@ function del(id) {
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${requestScope.list}" var="r">
+					<c:forEach items="${requestScope.list1}" var="r">
 						<tr>
-						    <td>${r.operator_id}</td>
-						    <td>${r.creatdate}</td>
 							<td>${r.niki}</td>
 							<td>${r.name}</td>
 							<td>${r.sex_name}</td>
@@ -156,15 +182,43 @@ function del(id) {
 				    ,layout: [ 'prev', 'page', 'next', 'count','skip']
 				    ,jump: function(obj,first){
 				      if(!first){
-				    	  location.href="../Activity_user/index?pageno="+obj.curr;
+				    	  location.href="../Activity_user/index?pageno="+obj.curr+"&activity_id="+${requestScope.activity_id};
 				        } 
 				    }
 				  });
 			});
 		$(function() {
+			//$(".btn-group.bootstrap-select.select.college").css("display","none");
+			$("#school").on("change",function(){
+				$(".btn-group.bootstrap-select.select.college ul li").empty();
+				$.ajax({
+                     type: "POST",
+                     dataType: "json",
+                     url: "../Activity_user/select?school_id="+$(".school").val(),//url
+                     success: function (result) {
+              	        $.each(result,function(val,item){
+              	          if(val==0){
+              	        	  $(".btn-group.bootstrap-select.select.college").find(".filter-option.pull-left").text(item.name);
+              	        	  $(".college").append("<option value='"+item.id+"' style='display:none'>"+item.name+"</option>");
+              	        	  $(".btn-group.bootstrap-select.select.college ul").append("<li rel='"+val+"' class='selected'><a tabindex='0' class style><span class='text' id='s'>"+item.name+"</span><i class='fa fa-check check-mark'></i></a></li>");}	
+              	          else{$(".btn-group.bootstrap-select.select.college ul").append("<li rel='"+val+"'><a tabindex='0' class style><span class='text' id='s'>"+item.name+"</span><i class='fa fa-check check-mark'></i></a></li>");
+              	               $(".college").append("<option value='"+item.id+"' style='display:none'>"+item.name+"</option>");
+              	               
+              	          }
+              	        })
+                      },
+                 });
+			})
+				$("#school").val(${requestScope.svalue});
+				$(".btn-group.bootstrap-select.select.school").find(".filter-option.pull-left").text('${requestScope.sname.name}');
+				
+				$("#college").val(${requestScope.cvalue});
+				$(".btn-group.bootstrap-select.select.college").find(".filter-option.pull-left").text('${requestScope.cname.name}');
+        	
+			
 			if(${fn:length(requestScope.list)==0&&requestScope.count!=0}){ 
 				 var pageno = ${requestScope.page-1} 
-				 location.href="../Activity_user/index?pageno="+pageno;
+				 location.href="../Activity_user/index?pageno="+pageno+"&activity_id="+${requestScope.activity_id};
 			}
 		});
 		

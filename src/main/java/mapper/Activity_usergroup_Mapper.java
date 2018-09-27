@@ -21,6 +21,9 @@ public interface Activity_usergroup_Mapper extends BaicsMapper{
     
     @Select("select * from activity_usergroup where id=#{id}")
 	public List<Activity_usergroup> selectById(int id);
+	
+	@Select("select * from activity_usergroup where activity_id=#{nowid}")
+	public List<Activity_usergroup> selectByActivity_id(SearchInfo info);
     
 	@Insert("insert into activity_usergroup(name,activity_id,ids,comments,creatdate,operator_id) values(#{name},#{activity_id},#{ids},#{comments},#{creatdate},#{operator_id})")
 	public void insert(Activity_usergroup au);
@@ -40,6 +43,9 @@ public interface Activity_usergroup_Mapper extends BaicsMapper{
 	@Select("select count(id) count from activity_usergroup ${where}")
 	public int count(SearchInfo info);
 	
+	@Select("select count(id) count from activity_usergroup  where activity_id=#{nowid}")
+	public int countByid(SearchInfo info);
+	
 	@Select("select GROUP_CONCAT(ids) ids from activity_usergroup")
 	public List<Activity_usergroup> selectAllids();
 	
@@ -55,7 +61,11 @@ public interface Activity_usergroup_Mapper extends BaicsMapper{
 	@Update("update activity_user set group_id=#{group_id2} where id in (${ids})")
 	public void updateuserid(Activity a);
 	
+	
+	
 	@Update("update activity_user set group_id=0 where id not in (${ids}) and group_id=#{id}")
 	public void updateuseridto0(Activity a);
 	
+	@Update("update activity_user set group_id=0 where group_id=#{id}")
+	public void updateuseridto02(Activity a);
 }

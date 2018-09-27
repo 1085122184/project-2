@@ -47,7 +47,6 @@ Activity_time at;
 		    m.put("count", service.countByactivity_id(activity_id));
 			m.put("list1", service.selectByactivity_id(infoid));
 		}
-		
 		m.put("activity", aservice.selectDesc());
 		super.index(info, m, req);
 	}

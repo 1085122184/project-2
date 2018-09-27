@@ -65,7 +65,7 @@
 					<div class="title">用户</div>
 				</div>
 				
-				<div class="shortcut" onclick="Win10.openUrl('../Activity_usergroup/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>分组列表')">
+				<div class="shortcut" onclick="Win10.openUrl('../Activity_usergroup/allindex?myid=0','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>分组信息')">
 					<img class="icon"
 						src="../img/icon/admin.png" />
 					<div class="title">分组信息</div>
@@ -75,6 +75,12 @@
 					<img class="icon"
 						src="../img/icon/admin.png" />
 					<div class="title">学校</div>
+				</div>
+				
+				<div class="shortcut" onclick="Win10.openUrl('../Activity_college/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>学校列表',[['55%','58%'],['100px','480px']])">
+					<img class="icon"
+						src="../img/icon/admin.png" />
+					<div class="title">学院</div>
 				</div>
 
                 <div class="shortcut" onclick="Win10.openUrl('../Activity/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>活动列表')">
@@ -89,10 +95,16 @@
 					<div class="title">考勤</div>
 				</div>
 				
-				<div class="shortcut" onclick="Win10.openUrl('../Activity_time/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>考勤列表')">
+				<div class="shortcut" onclick="Win10.openUrl('../Activity_time/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>活动时间列表')">
 					<img class="icon"
 						src="../img/icon/admin.png" />
 					<div class="title">时间安排</div>
+				</div>
+				
+				<div class="shortcut" onclick="Win10.openUrl('../Activity_user2/index.jsp','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>用户列表')">
+					<img class="icon"
+						src="../img/icon/admin.png" />
+					<div class="title">用户</div>
 				</div>
 
 			</div>

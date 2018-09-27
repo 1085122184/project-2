@@ -70,11 +70,11 @@ function del(id) {
 	<div class="block-area" id="tableStriped">
 		<div class="table-responsive overflow">
 		<button class="btn btn-sm btn-alt m-r-5" type="button"
-				onclick="openwin('../Activity_usergroup/add','610','400')">新增</button>
+				onclick="openwin('../Activity_usergroup/add?activity_id=${requestScope.activity_id}','610','400')">新增</button>
 			<div>
-			<c:if test="${fn:length(requestScope.list)==0}">暂无数据</c:if>
+			<c:if test="${fn:length(requestScope.list1)==0}">暂无数据</c:if>
 			</div>
-			<c:if test="${fn:length(requestScope.list)!=0}">
+			<c:if test="${fn:length(requestScope.list1)!=0}">
 			<table class="tile table table-bordered table-striped"
 				style="width: 100%">
 				<thead>
@@ -89,7 +89,7 @@ function del(id) {
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${requestScope.list}" var="r">
+					<c:forEach items="${requestScope.list1}" var="r">
 						<tr>
 						    <td>${r.operator_id}</td>
 						    <td>${r.creatdate}</td>
@@ -103,7 +103,7 @@ function del(id) {
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
 								onclick="del(${r.id})">删除</a>
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
-								onclick="openwin('../Activity_usergroup/adduser?id=${r.id}','610','400')">添加组员</a></td>
+								onclick="openwin('../Activity_usergroup/adduser?id=${r.id}&activity_id=${requestScope.activity_id}','610','400')">添加组员</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

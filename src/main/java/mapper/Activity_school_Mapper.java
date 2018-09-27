@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import entity.Activity;
 import entity.Activity_school;
 import utils.SearchInfo;
 
@@ -15,6 +16,9 @@ import utils.SearchInfo;
 public interface Activity_school_Mapper extends BaicsMapper{
     @Select("select * from activity_school ${where} ${limit}")
 	public List<Activity_school> select(SearchInfo info);
+	
+	@Select("SELECT * from activity_school order by id desc")
+	public List<Activity_school> selectDesc();
     
     @Select("select * from activity_school where id=#{id}")
 	public List<Activity_school> selectById(int id);
@@ -39,4 +43,7 @@ public interface Activity_school_Mapper extends BaicsMapper{
 	
 	@Select("select * from activity_school")
 	public List<Activity_school> selectAll();
+	
+	@Select("select max(id) from activity_school")
+	public int selectMaxId();
 }
