@@ -21,14 +21,24 @@
         <link href="../admin-static/css/style.css" rel="stylesheet">
         <link href="../admin-static/css/icons.css" rel="stylesheet">
         <link href="../admin-static/css/generics.css" rel="stylesheet"> 
+        <link href="../css/swiper.min.css" rel="stylesheet">
+        <style type="text/css">
+.swiper-container {
+	width: 400px;
+	height: 300px;
+	background-color: red;
+}
+</style>
     </head>
     <body id="skin-blur-violate">
-            <!-- Content -->
+        <!-- Content -->
+        <div class="erer">
+        
+        </div>
             <section id="content" class="container">
                 <div class="col-md-8 clearfix">
                     <div id="calendar" class="p-relative p-10 m-b-20">
-                        <!-- Calendar Views -->
-                        <ul class="calendar-actions list-inline clearfix">
+                    <ul class="calendar-actions list-inline clearfix">
                             <li class="p-r-0">
                                 <a data-view="month" href="#" class="tooltips" title="Month">
                                     <i class="sa-list-month"></i>
@@ -51,63 +61,18 @@
                 
 
                 <!-- Add event -->
-                <div class="modal fade" id="addNew-event">
-                     <div class="modal-dialog">
-                          <div class="modal-content">
-                               <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title">Add an Event</h4>
-                               </div>
-                               <div class="modal-body">
-                                    <form class="form-validation" role="form">
-                                         <div class="form-group">
-                                              <label for="eventName">Event Name</label>
-                                              <input type="text" class="input-sm form-control validate[required]" id="eventName" placeholder="...">
-                                         </div>
-                                         
-                                         <input type="hidden" id="getStart" />
-                                         <input type="hidden" id="getEnd" />
-                                    </form>
-                               </div>
-                               
-                               <div class="modal-footer">
-                                    <input type="submit" class="btn btn-info btn-sm" id="addEvent" value="Add Event">
-                                    <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Close</button>
-                               </div>
-                          </div>
-                     </div>
+                <div class="modal fade" id="addNew-event" style="height: 500px">
                 </div>
-                
-                <!-- Modal Resize alert -->
-                <div class="modal fade" id="editEvent">
-                     <div class="modal-dialog">
-                          <div class="modal-content">
-                               <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title">Edit Event</h4>
-                               </div>
-                               <div class="modal-body">
-                                    <div id="eventInfo"></div>
-                               </div>
-                               
-                               <div class="modal-footer">
-                                    <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Okay</button>
-                                    <button type="button" class="btn btn-info btn-sm" id="editCancel" data-dismiss="modal">Cancel</button>
-                               </div>
-                          </div>
-                     </div>
-                </div>
-                
-                <br/><br/>
             </section>
-        
         <!-- Javascript Libraries -->
         <!-- jQuery -->
         <script src="../admin-static/js/jquery.min.js"></script> <!-- jQuery Library -->
-
+        <script src="../admin-static/js/jquery-ui.min.js"></script> <!-- jQuery UI -->
         <!-- Bootstrap -->
         <script src="../admin-static/js/bootstrap.min.js"></script>
-        
+        <script type="text/javascript"
+		src="../component/layer-v3.0.3/layer/layer.js"></script>
+	<script type="text/javascript" src="../component/layui/layui.js"></script>
         <!-- UX -->
         <script src="../admin-static/js/scroll.min.js"></script> <!-- Custom Scrollbar -->
         
@@ -116,18 +81,28 @@
         <script src="../admin-static/js/validation/validationEngine.min.js"></script> <!-- jQuery Form Validation Library - requirred with above js -->
         
         <!-- Other -->
-        <script src="../admin-static/js/calendar.min.js"></script> <!-- Calendar -->
         
+        <script src="../js/swiper.min.js"></script> <!-- 轮播 -->
         
         <!-- All JS functions -->
         <script src="../admin-static/js/functions.js"></script>
-        
+        <script src="../admin-static/js/calendar.min.js"></script> <!-- Calendar -->
         <script type="text/javascript">
-            $(document).ready(function() {
-                var date = new Date();
-                var d = date.getDate();
-                var m = date.getMonth();
-                var y = date.getFullYear();
+        function openwin(url,w,h) {
+		    layer.open({
+		      type: 2,
+		      shadeClose: false,
+		      title:false,
+		      closeBtn :0,
+		      shade: false,
+		      area: [w+'px', h+'px'],
+		      content: [url , 'no']
+		    });
+		  }
+        
+        
+        
+             $(document).ready(function() {
                 $('#calendar').fullCalendar({
                     header: {
                          center: 'title',
@@ -138,47 +113,15 @@
                     selectable: true,
                     selectHelper: true,
                     editable: true,
-                    events: [
-                        {
-                            title: '的地方地方',//值
-                            start: new Date(2018,08, 01),
-                        },
-                        {
-                            title: 'dddddd',
-                            start: new Date(y, m, 10),
-                            allDay: true
-                        },
-                        {
-                            title: 'Repeat Event',
-                            start: new Date(y, m, 18),
-                            allDay: true
-                        },
-                        {
-                            title: 'Semester Exam',
-                            start: new Date(y, m, 20),
-                            end: new Date(y, m, 23)
-                        },
-                        {
-                            title: 'Soccor match',
-                            start: new Date(y, m, 5),
-                            end: new Date(y, m, 6)
-                        },
-                        {
-                            title: 'Coffee time',
-                            start: new Date(y, m, 21),
-                        },
-                        {
-                            title: 'Job Interview',
-                            start: new Date(y, m, 5),
-                        }
-                    ],
+                    events:${requestScope.list1},
                      
                     //On Day Select
                     select: function(start, end, allDay) {
-                        $('#addNew-event').modal('show');   
-                        $('#addNew-event input:text').val('');
-                        $('#getStart').val(start);
-                        $('#getEnd').val(end);
+                    	var month=parseInt(start.getMonth())+1;
+                    	var dateinfo = start.getFullYear()+"-"+month+"-"+start.getDate();
+                    	
+                    	openwin("info?dateinfo="+dateinfo,'760','485')
+                    
                     },
                      
                     eventResize: function(event,dayDelta,minuteDelta,revertFunc) {

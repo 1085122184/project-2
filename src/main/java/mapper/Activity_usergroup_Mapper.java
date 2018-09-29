@@ -46,7 +46,7 @@ public interface Activity_usergroup_Mapper extends BaicsMapper{
 	@Select("select count(id) count from activity_usergroup  where activity_id=#{nowid}")
 	public int countByid(SearchInfo info);
 	
-	@Select("select GROUP_CONCAT(ids) ids from activity_usergroup")
+	@Select("select GROUP_CONCAT(ids) ids from activity_usergroup where ids <> ''")
 	public List<Activity_usergroup> selectAllids();
 	
 	@Select("select u.*,s.name sname from activity_user u inner join activity_school s on s.id=u.school_id ${where}")

@@ -95,6 +95,7 @@ overflow: auto!important;
                    <div class="col-md-4" style="margin-left: 90px">
 					<label><a id="xing">*</a>用户名</label>
 					<input type="hidden" name="creatdate" value="${requestScope.date}">
+					<input type="hidden" name="activity_id" value="${requestScope.activity_id}">
 					<input type="text" class="form-control input-sm m-b-10" value="${requestScope.subinfo.niki}"
 					    placeholder="你的登录名" id="one" name="niki" style="width: 130px;display: inline;">&nbsp;&nbsp;&nbsp;
 					<label><a id="xing">*</a>姓名</label>
@@ -293,8 +294,9 @@ overflow: auto!important;
        		var $txt=$("#s").text();
        		$(this).parents('.dropdown-menu').siblings('button').find('.pull-left').text($txt);
         	})
-        	$("#search").val(${requestScope.subinfo.cid})
+        	//$("#search").val(${requestScope.subinfo.cid})
         	$(".btn-group.bootstrap-select.select.college").find(".filter-option.pull-left").text('${requestScope.subinfo.cname}')
+        	$(".college").append("<option value='"+${requestScope.subinfo.cid}+"' style='display:none'></option>");
         	//$(".filter-option.pull-left").text("sdsaf");
 		})
 

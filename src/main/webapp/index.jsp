@@ -101,7 +101,7 @@
 					<div class="title">时间安排</div>
 				</div>
 				
-				<div class="shortcut" onclick="Win10.openUrl('../Activity_user2/index.jsp','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>用户列表')">
+				<div class="shortcut" onclick="Win10.openUrl('../Activity_calendar/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>用户列表')">
 					<img class="icon"
 						src="../img/icon/admin.png" />
 					<div class="title">用户</div>

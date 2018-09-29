@@ -51,7 +51,7 @@
 					       <input type="hidden" name="activity_id" value="${requestScope.activity_id }" >
                            <div class="input-append date form_date end_date" >
 					       <label style="margin-top: 29px;margin-left: 100px">时间信息</label>
-					       <input type="text" id="mirror_field" class="form-control enddate" readonly name="dateinfo"/>
+					       <input type="text" id="mirror_field" class="form-control enddate" readonly name="dateinfo" data-date-format="yyyy-mm-dd"/>
                             <span class="col-md-10 add-on end"><i class="glyphicon glyphicon-th icon-th" style="font-size: 24px"></i></span>
                            </div>
                            <label style="margin-left: 344px">状&nbsp;&nbsp;&nbsp;&nbsp;态</label>
@@ -155,7 +155,7 @@ function save() {
 
 $(".form_date").datetimepicker({
 	language:'zh-CN',
-	format: 'yyyy,mm,dd',
+	format: 'yyyy-m-d',
 	 autoclose: true,
      todayBtn: true,
      minView: 2,

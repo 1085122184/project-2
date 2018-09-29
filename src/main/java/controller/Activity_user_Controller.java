@@ -105,6 +105,7 @@ Activity_user user;
    @Override
 	public String edit(int id, ModelMap m, HttpServletRequest req) throws Exception {
 		m.put("subinfo", service.selectById(id).get(0));
+		m.put("activity_id",req.getParameter("activity_id"));
 		return super.edit(id, m, req);
 	}
    @Override

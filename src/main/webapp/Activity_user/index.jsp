@@ -141,7 +141,7 @@ function del(id) {
 							<td>${r.status_name}</td>
 							<td><a class="glyphicon glyphicon-pencil"
 								href="javascript:;"
-								onclick="openwin('../Activity_user/edit?id=${r.id}','610','400')">修改</a>
+								onclick="openwin('../Activity_user/edit?id=${r.id}&activity_id=${requestScope.activity_id}','610','400')">修改</a>
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
 								onclick="del(${r.id})">删除</a></td>
 						</tr>

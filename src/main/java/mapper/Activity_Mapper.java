@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import entity.Activity;
 import entity.Activity_time;
+import entity.Group;
+import entity.User;
 import utils.SearchInfo;
 
 @Repository("Activity_Mapper")
@@ -46,10 +48,10 @@ public interface Activity_Mapper extends BaicsMapper{
 	
 	@Select("select a.*,t.* from activity a left join activity_time t on t.activity_id=a.id where a.id=#{id}")
 	public List<Activity> timeinfo(int id);
-	@Select("select a.*,u.name uname,u.id uid from activity a LEFT JOIN activity_usergroup u on u.activity_id=a.id where a.id=#{id}")
-	public List<Activity> groupinfo(int id);
+	@Select("select u.activity_id activity_id,u.name uname,u.id uid from activity_usergroup u ${where}")
+	public List<Group> groupinfo(SearchInfo info);
 	@Select("select name,group_id from activity_user")
-	public List<Activity> userinfo();
+	public List<User> userinfo();
 	
 	@Select("select max(id) from activity")
 	public int selectMaxId();

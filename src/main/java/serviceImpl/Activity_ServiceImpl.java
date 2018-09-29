@@ -5,18 +5,21 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import entity.Activity;
+import entity.Group;
+import entity.User;
 import mapper.Activity_Mapper;
 import mapper.Activity_school_Mapper;
 import service.Activity_Service;
+import utils.SearchInfo;
 
 @Service("Activity_ServiceImpl")
 public class Activity_ServiceImpl extends Basic_ServiceImpl<Activity> implements Activity_Service{
 	@Resource(name="Activity_Mapper")
 	Activity_Mapper mapper;
 
-	public List<Activity> groupinfo(int id) {
+	public List<Group> groupinfo(SearchInfo info) {
 		// TODO Auto-generated method stub
-		return mapper.groupinfo(id);
+		return mapper.groupinfo(info);
 	}
 
 	public List<Activity> timeinfo(int id) {
@@ -24,7 +27,7 @@ public class Activity_ServiceImpl extends Basic_ServiceImpl<Activity> implements
 		return mapper.timeinfo(id);
 	}
 
-	public List<Activity> userinfo() {
+	public List<User> userinfo() {
 		// TODO Auto-generated method stub
 		return mapper.userinfo();
 	}

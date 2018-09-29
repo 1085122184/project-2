@@ -16,12 +16,23 @@ public class Activity_time implements Serializable{
 	int operator_id;
 	int status;
 	String comments;
+	String aname;
+	String ids;
+		
 	public static String[] statuses = {"ÔÝ¶¨","È·¶¨"};
 	
 	public String getStatus_name() {
 		return statuses[status];
 	}
 	
+	public String getAname() {
+		return aname;
+	}
+
+	public void setAname(String aname) {
+		this.aname = aname;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -100,6 +111,14 @@ public class Activity_time implements Serializable{
 	}
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	public String getIds() {
+		return ids;
+	}
+
+	public void setIds(String ids) {
+		this.ids = ids;
 	}
 	
 	

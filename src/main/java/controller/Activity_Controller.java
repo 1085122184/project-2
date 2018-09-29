@@ -47,7 +47,7 @@ Activity a;
    @RequestMapping("activityinfo")
    public String activityinfo(SearchInfo info,int id, ModelMap m, HttpServletRequest req) {
 	   m.put("time",service.timeinfo(id).get(0));
-	   m.put("group", service.groupinfo(id));
+	   //m.put("group", service.groupinfo(id));
 	   m.put("user",service.userinfo());
 	   return "Activity/info";
    }

@@ -97,11 +97,11 @@ function del(id) {
 							<td>${r.project}</td>
 							<td>${r.point1}</td>
 							<td>${fn:length(r.idlist)}</td>
-							<td><a class="glyphicon glyphicon-pencil"
+							<td><!--<a class="glyphicon glyphicon-pencil"
 								href="javascript:;"
-								onclick="openwin('../Activity_usergroup/edit?id=${r.id}','610','400')">修改</a>
-								<a class="glyphicon glyphicon-trash" href="javascript:;"
-								onclick="del(${r.id})">删除</a>
+								onclick="openwin('../Activity_usergroup/edit?id=${r.id}','610','400')">修改</a> -->
+								<!-- <a class="glyphicon glyphicon-trash" href="javascript:;"
+								onclick="del(${r.id})">删除</a> -->
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
 								onclick="openwin('../Activity_usergroup/adduser?id=${r.id}&activity_id=${requestScope.activity_id}','610','400')">添加组员</a></td>
 						</tr>
