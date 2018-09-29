@@ -39,7 +39,7 @@ Activity_Service aservice;
 			m.put("dateinfo", dateinfo);
 			m.put("info", JsonUtil.toString(service.selectByDateinfo(dateinfo)));
 			if(service.selectByDateinfo(dateinfo).size()>0) {
-				String activity_ids = service.selectGROUP(dateinfo).get(0).getIds()+",0";
+				String activity_ids = service.selectGROUP(dateinfo).get(0).getIds();
 		    	info.setWhere(" where activity_id in("+activity_ids+")");
 		    	m.put("group", JsonUtil.toString(aservice.groupinfo(info)));
 		    	m.put("user", JsonUtil.toString(aservice.userinfo()));

@@ -154,6 +154,9 @@ overflow: auto!important;
                      </select>
                      
                      <select name="college_id" id="search" class="select college" style="display: inline;">
+                       <c:forEach items="${requestScope.college}" var="r">
+                          <option value="${r.id}">${r.name}</option>
+                       </c:forEach>
                      
                      </select>
                    </div>
@@ -228,16 +231,17 @@ overflow: auto!important;
 		<script src="../admin-static/js/select.min.js"></script> <!-- Custom Select -->
 		<script type="text/javascript" src="../component/layer-v3.0.3/layer/layer.js"></script>
 		<script type="text/javascript">
+		function closewin(){
+	          var index = parent.layer.getFrameIndex(window.name);
+	          parent.layer.close(index);
+         }
 		$(function() {
 			 $(".btn-group.bootstrap-select.select.sex").append($("<label class='Type'><a id='xing'>*</a>类型</label>"));
 			 $(".btn-group.bootstrap-select.select.school").append($("<label class='Type'><a id='xing'>*</a>学院</label>"));
 		})
 
 		
-		function closewin() {
-	          var index = parent.layer.getFrameIndex(window.name);
-	          parent.layer.close(index);
-         }
+		
          function save() {
 	         if($("#one").val()==''){
 		        layer.msg("请完善个人信息",{icon:2,time:1000});
@@ -294,10 +298,6 @@ overflow: auto!important;
        		var $txt=$("#s").text();
        		$(this).parents('.dropdown-menu').siblings('button').find('.pull-left').text($txt);
         	})
-        	//$("#search").val(${requestScope.subinfo.cid})
-        	$(".btn-group.bootstrap-select.select.college").find(".filter-option.pull-left").text('${requestScope.subinfo.cname}')
-        	$(".college").append("<option value='"+${requestScope.subinfo.cid}+"' style='display:none'></option>");
-        	//$(".filter-option.pull-left").text("sdsaf");
 		})
 
 

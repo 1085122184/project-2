@@ -34,9 +34,10 @@ left: 66px
 	height: 100%;
 	background-color: red;
 }
+
 </style>
 </head>
-<body style="color: black;" class="info">
+<body style="color: black;">
 		
 		<div class="erer" style="height: 100%">
         <h6 class="dateinfo"></h6> 
@@ -79,15 +80,19 @@ left: 66px
 								.append(
 										"<div class='swiper-slide'><h1>"
 												+ info[i].aname
-												+ "</h1><br><h6 class='group"+i+"'></h6><br><h6>活动地点："
+												+ "</h1><br><h6 class='group"+i+"' id='group'></h6><br><h6>活动地点："
 												+ info[i].roominfo
 												+ "</h6><br><h6>第一场："
 												+ info[i].time1 + "</h6></div>");
+						if(group.length==0){
+							  $("#group").html("暂无参赛小组")
+						  }else{
 						for (var j = 0; j < group.length; j++) {
-							
 							if (group[j].activity_id == info[i].activity_id) {
 								$(".group" + i + "").append(
 										"<br>参赛成员：" + group[j].uname + "<br>")
+							}else{
+								$(".group" + i + "").html("暂无参赛小组")
 							}
 							for(var m=0;m<user.length;m++){
 								if(group[j].activity_id == info[i].activity_id&&group[j].uid==user[m].group_id){
@@ -96,6 +101,7 @@ left: 66px
 								}
 							}
 						}
+					  }
 					}
 				}
 				var mySwiper = new Swiper('.swiper-container', {})
