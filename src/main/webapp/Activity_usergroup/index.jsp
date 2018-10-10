@@ -95,7 +95,7 @@ function del(id) {
 						    <td>${r.creatdate}</td>
 							<td>${r.name}</td>
 							<td>${r.project}</td>
-							<td>${r.point1}</td>
+							<td>${(r.point1+r.point2+r.point3+r.point4+r.point5+r.point6+r.point7+r.point8+r.point9+r.point10)/10}</td>
 							<td>${fn:length(r.idlist)}</td>
 							<td><!--<a class="glyphicon glyphicon-pencil"
 								href="javascript:;"
@@ -103,7 +103,9 @@ function del(id) {
 								<!-- <a class="glyphicon glyphicon-trash" href="javascript:;"
 								onclick="del(${r.id})">删除</a> -->
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
-								onclick="openwin('../Activity_usergroup/adduser?id=${r.id}&activity_id=${requestScope.activity_id}','610','400')">添加组员</a></td>
+								onclick="openwin('../Activity_usergroup/adduser?id=${r.id}&activity_id=${requestScope.activity_id}','610','400')">添加组员</a>
+								<a class="glyphicon glyphicon-trash" href="javascript:;"
+								onclick="openwin('../Activity_usergroup/mark?id=${r.id}','610','400')">测评</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

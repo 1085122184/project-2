@@ -29,7 +29,7 @@ public class Activity_user implements Serializable{
 	private String comments;
 	private String cname;
 	private String sname;
-	
+	int level;
 	
 	
 	public static String[] sexs={"男","女"};
@@ -38,8 +38,14 @@ public class Activity_user implements Serializable{
 	public static String[] glevels={"A","B","C","D","N","F"};
 	public static String[] slevels={"未联系","已联系","预报名","已报名","终结"};
 	public static String[] statuses={"正常","禁止","过期"};
+	public static String[] levels={"A","B","C"};
 	
-	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	public String getCname() {
 		return cname;
 	}
@@ -60,6 +66,9 @@ public class Activity_user implements Serializable{
 	}
 	public String getYlevel_name() {
 		return ylevels[ylevel];
+	}
+	public String getLevel_name() {
+		return levels[level];
 	}
 	public String getSlevel_name() {
 		return slevels[slevel];

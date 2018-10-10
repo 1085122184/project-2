@@ -1,15 +1,26 @@
 package controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import entity.Activity;
+import entity.Activity_checkwork;
 import entity.Activity_time;
+import entity.Activity_user;
 import service.Activity_Service;
+import service.Activity_checkwork_Service;
 import service.Activity_time_Service;
+import service.Activity_user_Service;
+import utils.JsonInfo;
 import utils.SearchInfo;
 import utils.SearchInfo_activity_id;
 
@@ -20,6 +31,10 @@ public class Activity_time_Controller extends Basic_Controller<Activity_time>{
 Activity_time_Service service;
 @Resource(name="Activity_ServiceImpl")
 Activity_Service aservice;
+@Resource(name="Activity_user_ServiceImpl")
+Activity_user_Service uservice;
+@Resource(name="Activity_checkwork_ServiceImpl")
+Activity_checkwork_Service chservice;
 Activity_time at;
 
 @Override
@@ -58,8 +73,40 @@ Activity_time at;
 		m.put("activity_id", req.getParameter("activity_id"));
 		int id = Integer.valueOf(req.getParameter("activity_id"));
 		m.put("date",service.selectByactivityId(id));
+		
+		
 		return super.add(m, req);
 	}
+      @RequestMapping("insert_json1")
+    	public @ResponseBody JsonInfo insert_json1(Activity_time o, ModelMap m, HttpServletRequest req){
+    	     int id=o.getActivity_id();
+             String date=o.getDateinfo();
+             String ids = aservice.selectIds(id).get(0).getIds();
+             if(ids.length()>1) {
+            	 SearchInfo info = new SearchInfo();
+         		 info.setWhere(" where id in("+ids+")");
+         		 List<Activity_user> alist = uservice.selectIds(info);
+         		 Activity_checkwork ch = new Activity_checkwork();
+         		 Date d = new Date();
+                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                 String lastdate = sdf.format(d);
+                 ch.setLastdate(lastdate);
+                 ch.setDate(date);
+                 ch.setActivity_id(id);
+         		 for(int i=0;i<alist.size();i++) {
+         			ch.setUser_id(alist.get(i).getId());
+         			chservice.insert(ch);
+         		 }
+         		 service.insert(o);
+         		return new JsonInfo(1, "");
+             }else if(ids.length()==1){
+            	 System.out.println(111);
+            	 return new JsonInfo(0, "");
+             }
+			return null;
+    	}
+
+
    @Override
 	public String edit(int id, ModelMap m, HttpServletRequest req) throws Exception {
 		m.put("subinfo", service.selectById(id).get(0));

@@ -42,4 +42,9 @@ public class Activity_ServiceImpl extends Basic_ServiceImpl<Activity> implements
 		return mapper.selectDesc();
 	}
 
+	public List<Activity> selectIds(int id) {
+		// TODO Auto-generated method stub
+		return mapper.selectIds(id);
+	}
+
 }

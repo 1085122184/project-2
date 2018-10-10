@@ -16,11 +16,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import entity.Activity;
+import entity.Activity_checkwork;
 import entity.Activity_college;
 import entity.Activity_user;
+import service.Activity_Service;
+import service.Activity_checkwork_Service;
 import service.Activity_college_Service;
 import service.Activity_school_Service;
 import service.Activity_user_Service;
+import service.Activity_usergroup_Service;
+import utils.JsonInfo;
 import utils.SearchInfo;
 
 @Controller
@@ -32,6 +38,10 @@ Activity_user_Service service;
 Activity_school_Service sservice;
 @Resource(name="Activity_college_ServiceImpl")
 Activity_college_Service scervice;
+@Resource(name="Activity_checkwork_ServiceImpl")
+Activity_checkwork_Service chservice;
+@Resource(name="Activity_usergroup_ServiceImpl")
+Activity_usergroup_Service uservice;
 Activity_user user;
 
 
@@ -69,7 +79,7 @@ Activity_user user;
 	    }else {
 	    	int school_id = Integer.valueOf(req.getParameter("school_id"));
 		    int college_id = Integer.valueOf(req.getParameter("college_id"));
-		   
+		    m.put("college", scervice.selectBysid(school_id));
 		    m.put("svalue", school_id);
 		    m.put("sname", sservice.selectById(school_id).get(0));
 		    m.put("cvalue", college_id);
@@ -85,23 +95,33 @@ Activity_user user;
 		super.index(info, m, req);
 	}
 
-@Override
-	public String add(ModelMap m, HttpServletRequest req) throws Exception {
-	    m.put("activity_id",req.getParameter("activity_id"));
-	    m.put("school",sservice.selectAll());
-		m.put("sublist", service.select(new SearchInfo()));
-		m.put("sex", user.sexs);
-		m.put("type",user.types);
-		m.put("ylevel",user.ylevels);
-		m.put("glevel",user.glevels);
-		m.put("slevel",user.slevels);
-		m.put("status",user.statuses);
-		Date d = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String date = sdf.format(d);
-        m.put("date",date);
-		return super.add(m, req);
-	}
+      @RequestMapping("add1")  
+      public String add1(ModelMap m, HttpServletRequest req) throws Exception {
+  	    m.put("activity_id",req.getParameter("activity_id"));
+  	    m.put("school",sservice.selectAll());
+  		m.put("sublist", service.select(new SearchInfo()));
+  		m.put("sex", user.sexs);
+  		m.put("type",user.types);
+  		m.put("ylevel",user.ylevels);
+  		m.put("glevel",user.glevels);
+  		m.put("slevel",user.slevels);
+  		m.put("status",user.statuses);
+  		Date d = new Date();
+          SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+          String date = sdf.format(d);
+          m.put("date",date);
+  		return "Activity_user/edit";
+  	}
+      @RequestMapping("insert_json1")  
+      public @ResponseBody JsonInfo insert_json(Activity_checkwork o,Activity_user u,Activity a, ModelMap m, HttpServletRequest req){
+    	  service.insert(u);
+    	  int user_id=service.Maxid();
+    	  a.setIds(","+user_id+"");
+    	  a.setId(u.getActivity_id());
+    	  uservice.updatestudentids(a);
+    	  return new JsonInfo(1, "");
+  	}
+      
    @Override
 	public String edit(int id, ModelMap m, HttpServletRequest req) throws Exception {
 		m.put("subinfo", service.selectById(id).get(0));
@@ -110,6 +130,7 @@ Activity_user user;
 		m.put("college", scervice.selectBysid(school_id));
 		return super.edit(id, m, req);
 	}
+   
    @Override
 	public String delete(int id, ModelMap m, HttpServletRequest req) throws Exception {
 	   return super.delete(id, m, req);

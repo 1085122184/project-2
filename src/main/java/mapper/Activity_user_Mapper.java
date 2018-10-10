@@ -51,5 +51,6 @@ public interface Activity_user_Mapper extends BaicsMapper{
 	@Select("select * from activity_user")
 	public List<Activity_user> selectAll();
 	
-	
+	@Select("select id from activity_user ${where}")
+	public List<Activity_user> selectIds(SearchInfo info);
 }

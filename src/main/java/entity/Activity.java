@@ -13,7 +13,7 @@ public class Activity implements Serializable{
 	int count;
 	int classcount;
 	int source_operator_id;
-	int optiones;
+	String optiones;
 	String attention;
 	int type;
 	int Inustructor_operator_id;
@@ -41,12 +41,15 @@ public class Activity implements Serializable{
 	int group_id2;
 	
 	public static String[] types={"实训","宣讲","比赛"};
+	public static String[] option={"投影","话筒","插排","灯光"};
 	public String getType_name() {
 		return types[type];
 	}
-	
-	
-	
+	public String[] getOption_name() {
+		if(optiones.length()==0)return new String[0];
+		return optiones.split(",");
+		
+	}
 	
 	
 	
@@ -216,10 +219,11 @@ public class Activity implements Serializable{
 	public void setSource_operator_id(int source_operator_id) {
 		this.source_operator_id = source_operator_id;
 	}
-	public int getOptiones() {
+	
+	public String getOptiones() {
 		return optiones;
 	}
-	public void setOptiones(int optiones) {
+	public void setOptiones(String optiones) {
 		this.optiones = optiones;
 	}
 	public String getAttention() {

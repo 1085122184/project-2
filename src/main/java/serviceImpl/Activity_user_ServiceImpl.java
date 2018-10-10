@@ -35,4 +35,9 @@ public int countByid(SearchInfo info) {
 	return mapper.countByid(info);
 }
 
+public List<Activity_user> selectIds(SearchInfo info) {
+	// TODO Auto-generated method stub
+	return mapper.selectIds(info);
+}
+
 }

@@ -12,4 +12,5 @@ public interface Activity_user_Service extends Basic_Service<Activity_user>{
 	public List<Activity_user> selectAll();
 	public List<Activity_user> selectByActivityId(SearchInfo info);
 	public int countByid(SearchInfo info);
+	public List<Activity_user> selectIds(SearchInfo info);
 }

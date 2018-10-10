@@ -1,7 +1,7 @@
 package utils;
-
+import java.util.List;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 public class JsonUtil {
 	public static String toString(Object o)
 	{
@@ -14,16 +14,17 @@ public class JsonUtil {
 		}
 	}
 	
-	public static <T> T toObject(String str,Class<T> cla) {
+	public static <T> T toObject(String str,TypeReference<List<T>> typeReference) {
 		ObjectMapper mapper=new ObjectMapper();
 		try {
-			return mapper.readValue(str, cla);
+			return mapper.readValue(str, typeReference); 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
 	}
+	
+	
 	public static String returnvalue(int status,String text) {
 		return toString(new JsonInfo(status,text));
 	}

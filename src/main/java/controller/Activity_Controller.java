@@ -1,14 +1,19 @@
 package controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import entity.Activity;
 import service.Activity_Service;
+import utils.JsonInfo;
+import utils.JsonUtil;
 import utils.SearchInfo;
 
 @Controller
@@ -32,6 +37,7 @@ Activity a;
 	public String add(ModelMap m, HttpServletRequest req) throws Exception {
 		m.put("sublist", service.select(new SearchInfo()));
 		m.put("types", a.types);
+		m.put("option", a.option);
 		return super.add(m, req);
 	}
    @Override
@@ -52,6 +58,9 @@ Activity a;
 	   return "Activity/info";
    }
    
-   
-
+   @RequestMapping("sheshi")
+   public @ResponseBody List<Activity> sheshi(ModelMap m,int id) {
+	   m.put("option", JsonUtil.toString(a.option));
+	   return service.selectById(id);
+   }
 }

@@ -26,7 +26,7 @@ public interface Activity_time_Mapper extends BaicsMapper{
 	@Insert("insert into activity_time(activity_id,dateinfo,time1,time2,time3,time4,time5,time6,roominfo,operator_id,status,comments) values(#{activity_id},#{dateinfo},#{time1},#{time2},#{time3},#{time4},#{time5},#{time6},#{roominfo},#{operator_id},#{status},#{comments})")
 	public void insert(Activity_time a);
 	
-	@Update("update activity_time set start_date=#{start_date},end_date=#{end_date},time1=#{time1},time2=#{time2},time3=#{time3},time4=#{time4},time5=#{time5},time6=#{time6},roominfo=#{roominfo} where id=#{id}")
+	@Update("update activity_time set dateinfo=#{dateinfo},time1=#{time1},time2=#{time2},time3=#{time3},time4=#{time4},time5=#{time5},time6=#{time6},roominfo=#{roominfo},comments=#{comments},status=#{status} where id=#{id}")
 	public void update(Activity_time a);
 	
 	@Update("update activity_time set name=#{name},parentid=#{parentid} ${where}")

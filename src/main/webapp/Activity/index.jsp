@@ -100,7 +100,7 @@ function del(id) {
 			<button class="btn btn-sm btn-alt m-r-5" style="position: absolute;left: 380px"><i class="glyphicon glyphicon-search"></i>搜索</button>
 			</form>
 			-->	<button class="btn btn-sm btn-alt m-r-5" type="button"
-				onclick="openwin('../Activity/add','500','300')">新增</button>
+				onclick="openwin('../Activity/add','500','350')">新增</button>
 			<c:if test="${fn:length(requestScope.list)==0}"><div style="height: 100px">暂无数据</div></c:if>
 			<c:if test="${fn:length(requestScope.list)!=0}">
 			<table class="tile table table-bordered table-striped"
@@ -124,16 +124,32 @@ function del(id) {
 							<td>${fn:length(r.groupidlist)-1}</td>
 							<td>${r.attention}</td>
 							<td>
-								<a class="glyphicon glyphicon-trash" href="javascript:;"
+								<!--<a class="glyphicon glyphicon-trash" href="javascript:;"
 								onclick="openwin('../Activity/activityinfo?id=${r.id}','760','485')">查看</a>
-								<a class="glyphicon glyphicon-trash" href="javascript:;"
-								onclick="del(${r.id})">删除</a></td>
+								  <a class="glyphicon glyphicon-trash sheshi" href="javascript:;" myid="${r.id}"
+								>查看设施</a></td>-->
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			</c:if>
 			<div id="demo1" class="col-md-4 m-b-10"></div>
+		</div>
+		<div class="ss" style="display: none;">
+		<table class="tile table table-bordered table-striped">
+		<thead>
+		<tr>
+		<th>设施</th>
+		<th>状态</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td></td>
+		</tr>
+		</tbody>
+		</table>
+		
 		</div>
 	</div>
 	<!-- Javascript Libraries -->
@@ -171,7 +187,32 @@ function del(id) {
 				    }
 				  });
 			});
+		
+		
 		$(function(){
+			$(".sheshi").on("mouseover",function(){
+				$(".ss").html("")
+				$.ajax({
+	                  //几个参数需要注意一下
+	                   type: "POST",//方法类型
+	                   dataType: "json",//预期服务器返回的数据类型
+	                   url: "../Activity/sheshi?id="+$(this).attr("myid"),//url
+	                   success: function (result) {
+	                	   $(".ss").css("display","block");
+	                	   $(".ss").append("<table class='tile table table-bordered table-striped'><thead><tr><th>设施</th><th>状态</th></tr></thead></table>")
+	                	   for(var i=0;i<result[0].option_name.length;i++){
+	                		   $(".ss").find(".table-striped").append("<tbody><tr><td>"+result[0].option_name[i]+"</td></tr></tbody>")
+	                		   
+	                	   }
+	                	      
+                             
+	                   },
+	               });
+			})
+			$(".sheshi").on("mouseout",function(){
+				$(".ss").css("display","none");
+			})
+			
 			$("#sselect").on("change",function(){
 				$(".sinput").css("display","none").attr("disabled","disabled");
 				$(".sinput1").css("display","none").attr("disabled","disabled");

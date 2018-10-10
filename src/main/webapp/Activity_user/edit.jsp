@@ -89,7 +89,7 @@ overflow: auto!important;
 		          <form class="row form-columned form1" id="form1" role="form" method="post" action="../Activity_user/update_json?id=${requestScope.subinfo.id}" autocomplete="off">
 		        </c:if>
 		        <c:if test="${requestScope.subinfo==null}">
-				  <form class="row form-columned form1" id="form1" role="form" method="post" action="../Activity_user/insert_json" autocomplete="off">
+				  <form class="row form-columned form1" id="form1" role="form" method="post" action="../Activity_user/insert_json1" autocomplete="off">
 				  <input type="hidden" name="operator_id" value="${sessionScope.niki.id}">
 				</c:if>
                    <div class="col-md-4" style="margin-left: 90px">
@@ -282,7 +282,7 @@ overflow: auto!important;
               	        $.each(result,function(val,item){
               	          if(val==0){
               	        	  $(".btn-group.bootstrap-select.select.college").find(".filter-option.pull-left").text(item.name);
-              	        	  $(".college").append("<option value='"+item.id+"' style='display:none'>"+item.name+"</option>");
+              	        	  $(".college").append("<option selected='selected' value='"+item.id+"' style='display:none'>"+item.name+"</option>");
               	        	  $(".btn-group.bootstrap-select.select.college ul").append("<li rel='"+val+"' class='selected'><a tabindex='0' class style><span class='text' id='s'>"+item.name+"</span><i class='fa fa-check check-mark'></i></a></li>");}	
               	          else{$(".btn-group.bootstrap-select.select.college ul").append("<li rel='"+val+"'><a tabindex='0' class style><span class='text' id='s'>"+item.name+"</span><i class='fa fa-check check-mark'></i></a></li>");
               	               $(".college").append("<option value='"+item.id+"' style='display:none'>"+item.name+"</option>");

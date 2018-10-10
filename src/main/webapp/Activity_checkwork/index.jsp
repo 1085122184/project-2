@@ -19,6 +19,7 @@
 <!-- CSS -->
 <link href="../admin-static/css/bootstrap.min.css" rel="stylesheet">
 <link href="../admin-static/css/animate.min.css" rel="stylesheet">
+<link href="../admin-static/date/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <link href="../admin-static/css/font-awesome.min.css" rel="stylesheet">
 <link href="../admin-static/css/style.css" rel="stylesheet">
 <link href="../admin-static/css/icons.css" rel="stylesheet">
@@ -30,6 +31,38 @@
     border: 1px solid white;
     height: auto;
     }
+    .select.checkwork{
+    width: 100%
+    }
+    .bootstrap-select > .btn {
+    width: 100%
+    }
+    .dropdown-menu{
+    width: 100%
+    }
+    .btn-group.bootstrap-select.select.one{
+width: 34%
+}
+.end_date{
+position: absolute;
+left: 240px;
+top: -37px
+}
+.enddate{
+    width: 300%;
+    height: 31px;
+    position: absolute;
+    left: 47px;
+    top: 53px;
+}
+.add-on.end{
+    position: absolute;
+    left: 140px;
+    top: 57px;
+}
+.bootstrap-select > .btn {
+    width: 46%;
+}
 </style>
 </head>
 <body id="skin-blur-ocean">
@@ -68,44 +101,63 @@ function del(id) {
 
 	<!-- Table Striped -->
 	<div class="block-area" id="tableStriped">
-		<div class="table-responsive overflow">
-			<button class="btn btn-sm btn-alt m-r-5" type="button"
-				onclick="openwin('../Activity_checkwork/add','350','200')">新增</button>
-			<c:if test="${fn:length(requestScope.list)==0}"><div style="height: 100px">暂无数据</div></c:if>
-			<c:if test="${fn:length(requestScope.list)!=0}">
+		<div class="table-responsive">
+		<form action="">
+		<label>当前活动</label> <select class="select one" name="activity_id" id="select"
+				style="display: inline;">
+				<c:forEach items="${requestScope.activity}" var="r" varStatus="v">
+					<option value="${r.id}">${r.name}</option>
+				</c:forEach>
+			</select>
+			<!--  <div class="input-append date form_date end_date" >
+					       <label style="margin-top: 56px;margin-left: -12px">时间信息</label>
+					       <input type="text" id="mirror_field" class="form-control enddate" readonly name="date" data-date-format="yyyy-mm-dd"/>
+                            <span class="col-md-10 add-on end"><i class="glyphicon glyphicon-th icon-th" style="font-size: 24px"></i></span>
+                           </div>-->
+                           
+                           			<!-- <button class="btn btn-sm btn-alt m-r-5" type="button"
+				onclick="search()" style="margin-left: 20px">查询</button> -->
+				<i class="glyphicon glyphicon-remove" style="margin-left: 534px" onclick="closewin()"></i>
+                 </form>          
+			<c:if test="${fn:length(requestScope.list1)==0}"><div style="height: 100px">暂无数据</div></c:if>
+			<c:if test="${fn:length(requestScope.list1)!=0}">
 			<table class="tile table table-bordered table-striped"
 				style="width: 100%">
 				<thead>
 					<tr>
-						<th>活动名称</th>
 						<th>用户姓名</th>
 						<th>时间</th>
-						<th>早</th>
-						<th>中</th>
-						<th>晚</th>
-						<th>最后时间</th>
+						<th width="16%">早</th>
+						<th width="16%">中</th>
+						<th width="16%">晚</th>
 						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${requestScope.list}" var="r">
+				<form class="form1" action="">
+					<c:forEach items="${requestScope.list1}" var="r">
 						<tr>
-							<td>${r.name}</td>
-							<td>${r.name}</td>
-							<td>${r.name}</td>
-							<td>${r.name}</td>
-							<td>${r.name}</td>
-							<td>${r.name}</td>
-							<td>${r.name}</td>
+						    <input type="hidden" value="${r.activity_id}" name="activity_id">
+						    <input type="hidden" value="${sessionScope.niki.id}" name="operator_id">
+						    <input type="hidden" value="${requestScope.date}" name="date">
+							<td>${r.uname}</td>
+							<td>${r.date}</td>
+							<td>
+                              ${r.check1_name}
+                            </td>
+							<td>
+							   ${r.check2_name}
+							</td>
+							<td>
+							  ${r.check3_name}
+							</td>
 							<td><a class="glyphicon glyphicon-pencil"
 								href="javascript:;"
 								onclick="openwin('../Activity_checkwork/edit?id=${r.id}','500','300')">修改</a>
-								<a class="glyphicon glyphicon-trash" href="javascript:;"
-								onclick="del(${r.id})">删除</a>
-								<a class="glyphicon glyphicon-trash" href="javascript:;"
-								onclick="openwin('../Activity_college/addid?school_id=${r.id}','350','200')">新增学院</a></td>
+								</td>
 						</tr>
-					</c:forEach>
+					  </c:forEach>
+					  </form>
 				</tbody>
 			</table>
 			</c:if>
@@ -121,6 +173,8 @@ function del(id) {
 	<script type="text/javascript" src="../component/layui/layui.js"></script>
 	<!-- Bootstrap -->
 	<script src="../admin-static/js/bootstrap.min.js"></script>
+	<script src="../admin-static/date/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="../admin-static/date/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 	<!-- UX -->
 	<script src="../admin-static/js/scroll.min.js"></script>
 	<!-- Custom Scrollbar -->
@@ -132,6 +186,22 @@ function del(id) {
 	<script src="../admin-static/js/select.min.js"></script>
 	<!-- Custom Select -->
 		<script type="text/javascript">
+		function closewin() {
+			var index = parent.layer.getFrameIndex(window.name);
+			parent.layer.close(index);
+		}
+		$("#select").on("change",function(){
+			location.href="../Activity_checkwork/index?activity_id="+$(this).val()
+		})
+		$(".form_date").datetimepicker({
+			language:'zh-CN',
+			format: 'yyyy-m-d',
+			 autoclose: true,
+		     todayBtn: true,
+		     minView: 2,
+			});
+		
+		
 		layui.use('laypage', function(){
 			  var laypage = layui.laypage;
 			  //执行一个laypage实例
@@ -139,7 +209,7 @@ function del(id) {
 				    elem: 'demo1'
 				    ,count: ${requestScope.count} 
 			  		,curr: ${requestScope.page} 
-				    ,layout: [ 'prev', 'page', 'next', 'count',, 'skip']
+				    ,layout: [ 'prev', 'page', 'next', 'count']
 				    ,jump: function(obj,first){
 				      if(!first){
 				    	  location.href="../Activity_checkwork/index?pageno="+obj.curr;
@@ -148,10 +218,12 @@ function del(id) {
 				  });
 			});
 		$(function() {
-			if(${fn:length(requestScope.list)==0&&requestScope.count!=0}){ 
-				 var pageno = ${requestScope.page-1} 
-				 location.href="../Activity_checkwork/index?pageno="+pageno;
-			}
+			//$("#select").on("change",function(){
+			//	location.href="../Activity_checkwork/index?activity_id="+$(this).val()
+			//})
+			$(".filter-option.pull-left").text('${requestScope.activity_name.name}');
+			$("#select").val(${requestScope.activity_id});
+			
 		});
 		
 		

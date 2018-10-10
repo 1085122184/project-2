@@ -41,10 +41,10 @@ left:220px
 </head>
 <body id="skin-blur-black">
         <!--<h6>修改信息<i class="glyphicon glyphicon-remove" style="margin-left: 430px" onclick="closewin()"></i></h6>-->
-		 <h6>新增操作员<i class="glyphicon glyphicon-remove" style="margin-left: 273px" onclick="closewin()"></i></h6> 
+		 <h6>考勤<i class="glyphicon glyphicon-remove" style="margin-left: 450px" onclick="closewin()"></i></h6> 
 		<div class="modal-footer">
 		              <c:if test="${requestScope.subinfo!=null}">
-		                <form class="row form-columned" id="form1" role="form" method="post" action="../Activity_school/update_json?id=${requestScope.subinfo.id}" autocomplete="off">
+		                <form class="row form-columned" id="form1" role="form" method="post" action="../Activity_checkwork/update_json?id=${requestScope.subinfo.id}" autocomplete="off">
 		              </c:if>
 		              <c:if test="${requestScope.subinfo==null}">
 						<form class="row form-columned" id="form1" role="form" method="post" action="../Activity_school/insert_json" autocomplete="off">
@@ -53,10 +53,10 @@ left:220px
 								 <label>早上</label>
                               <select name="check1" class="select one" style="display: inline;">
                                  <c:forEach items="${requestScope.check1}" var="r" varStatus="v">
-                                   <c:if test="${requestScope.subinfo.type==v.index}">
+                                   <c:if test="${requestScope.subinfo.check1==v.index}">
                                     <option value="${v.index}" selected="selected">${r}</option>
                                    </c:if>
-                                   <c:if test="${requestScope.subinfo.type!=v.index}">
+                                   <c:if test="${requestScope.subinfo.check1!=v.index}">
                                     <option value="${v.index}">${r}</option>
                                    </c:if>
                                  </c:forEach>
@@ -64,10 +64,10 @@ left:220px
                                <label>中午</label>
                               <select name="check2" class="select one" style="display: inline;">
                                  <c:forEach items="${requestScope.check2}" var="r" varStatus="v">
-                                   <c:if test="${requestScope.subinfo.type==v.index}">
+                                   <c:if test="${requestScope.subinfo.check2==v.index}">
                                     <option value="${v.index}" selected="selected">${r}</option>
                                    </c:if>
-                                   <c:if test="${requestScope.subinfo.type!=v.index}">
+                                   <c:if test="${requestScope.subinfo.check2!=v.index}">
                                     <option value="${v.index}">${r}</option>
                                    </c:if>
                                  </c:forEach>
@@ -75,10 +75,10 @@ left:220px
                                <label>晚上</label>
                               <select name="check3" class="select one" style="display: inline;">
                                  <c:forEach items="${requestScope.check3}" var="r" varStatus="v">
-                                   <c:if test="${requestScope.subinfo.type==v.index}">
+                                   <c:if test="${requestScope.subinfo.check3==v.index}">
                                     <option value="${v.index}" selected="selected">${r}</option>
                                    </c:if>
-                                   <c:if test="${requestScope.subinfo.type!=v.index}">
+                                   <c:if test="${requestScope.subinfo.check3!=v.index}">
                                     <option value="${v.index}">${r}</option>
                                    </c:if>
                                  </c:forEach>

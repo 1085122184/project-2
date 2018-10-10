@@ -129,7 +129,12 @@ public @ResponseBody JsonInfo myinsert_json(Activity_usergroup o, ModelMap m, Ht
     String ids = o.getIds();
     a.setIds(ids);
     a.setGroup_id2(group_id);
-    service.updateuserid(a);
+    if(ids!="") {
+   	 service.updateuserid(a);
+   	 service.updateuseridto0(a);
+   }else {
+   	service.updateuseridto02(a);
+   }
 	return new JsonInfo(1, "");
 }
    @Override
@@ -145,7 +150,6 @@ public @ResponseBody JsonInfo myinsert_json(Activity_usergroup o, ModelMap m, Ht
 	    	 service.updateuseridto0(a);
 	    }else {
 	    	service.updateuseridto02(a);
-	    	
 	    }
 	    
 		return super.update_json(o, m, req);
@@ -166,15 +170,13 @@ public @ResponseBody JsonInfo myinsert_json(Activity_usergroup o, ModelMap m, Ht
     	int activity_id=Integer.valueOf(req.getParameter("activity_id"));
     	m.put("id",id);
 		String ids = service.selectAllids().get(0).getIds();
-		System.out.println(ids+"");
 		if(ids!=""&&ids.length()!=0) {
-			info.setWhere(" where u.id in ("+ids+") and u.group_id="+id+" and activity_id="+activity_id+"");//and activity_id="+id+"
+			info.setWhere(" where u.id in ("+ids+") and u.group_id="+id+" and activity_id="+activity_id+"");
 	        info3.setWhere(" where u.id not in ("+ids+") and activity_id="+activity_id+"");
 			m.put("user1", service.selectnotids(info3));
 			m.put("user2", service.selectids(info));
 		}else{
-			System.out.println(123);
-			info.setWhere(" where u.group_id="+id+" and activity_id="+activity_id+"");//and activity_id="+id+"
+			info.setWhere(" where u.group_id="+id+" and activity_id="+activity_id+"");
 	        info3.setWhere(" where activity_id="+activity_id+"");
 			m.put("user1", service.selectnotids(info3));
 			m.put("user2", service.selectids(info));
@@ -200,15 +202,19 @@ public @ResponseBody JsonInfo myinsert_json(Activity_usergroup o, ModelMap m, Ht
     		m.put("activity_id",info.getNowid()); //记录当前id
     		m.put("activity_name", aservice.selectById(info.getNowid()).get(0));
     	}
-    	
-    	
-    	
     	m.put("myid",req.getParameter("myid"));//iframe按钮标记
     	m.put("activity", aservice.selectDesc());
-    	
     	return "Activity_usergroup/allindex";
     }
     
-    
-
+    @RequestMapping("mark")
+    public String mark(int id,ModelMap m) {
+    	m.put("point", service.selectById(id));
+    	return "Activity_usergroup/mark";
+    }
+    @RequestMapping("updatemark")
+    public @ResponseBody JsonInfo updatemark(Activity_usergroup a, ModelMap m, HttpServletRequest req){
+        service.updatemark(a);
+    	return new JsonInfo(1, "");
+	}
 }

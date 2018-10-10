@@ -21,7 +21,7 @@
 <link href="../admin-static/css/font-awesome.min.css" rel="stylesheet">
 <link href="../admin-static/css/style.css" rel="stylesheet">
 <link href="../admin-static/css/icons.css" rel="stylesheet">
-<link href="../admin-static/css/form.css" rel="stylesheet"><!-- button -->
+<link href="../admin-static/css/form.css" rel="stylesheet">
 <link href="../css/swiper.min.css" rel="stylesheet">
 <style type="text/css">
 .name{
@@ -45,22 +45,13 @@ left: 66px
 		
 		
 		
-		<!-- Javascript Libraries -->
-		<!-- jQuery -->
 		<script src="../admin-static/js/jquery.min.js"></script>
-		<!-- jQuery Library -->
-		<!-- Bootstrap -->
 		<script src="../admin-static/js/bootstrap.min.js"></script>
-		<!-- UX -->
 		<script src="../admin-static/js/scroll.min.js"></script>
-		<!-- Custom Scrollbar -->
-		<!-- Other -->
 		<script src="../admin-static/js/feeds.min.js"></script>
-		<!-- News Feeds -->
-		<!-- All JS functions -->
 		<script src="../admin-static/js/functions.js"></script>
-		<script src="../admin-static/js/select.min.js"></script> <!-- Custom Select -->
-		<script src="../js/swiper.min.js"></script> <!-- 轮播 -->
+		<script src="../admin-static/js/select.min.js"></script>
+		<script src="../js/swiper.min.js"></script> 
 		<script type="text/javascript" src="../component/layer-v3.0.3/layer/layer.js"></script>
 		<script type="text/javascript">
 		var info = ${requestScope.info};
@@ -70,7 +61,7 @@ left: 66px
 		$(function() {
 			$(".erer").append("<div class='swiper-container'><div class='swiper-wrapper'></div></div>");
 			$(".dateinfo").append(date+"日程安排");
-			$(".dateinfo").append("<i class='glyphicon glyphicon-remove' style='margin-left: 624px' onclick='closewin()'></i>");
+			$(".dateinfo").append("<i class='glyphicon glyphicon-remove' style='margin-left: 618px' onclick='closewin()'></i>");
 			if(info.length==0){
 				$(".swiper-wrapper").append("<div class='swiper-slide'><h1>暂无安排</h1></div>");
 			}
@@ -83,7 +74,12 @@ left: 66px
 												+ "</h1><br><h6 class='group"+i+"' id='group'></h6><br><h6>活动地点："
 												+ info[i].roominfo
 												+ "</h6><br><h6>第一场："
-												+ info[i].time1 + "</h6></div>");
+												+ info[i].time1 + "</h6><h6>第二场："
+												+ info[i].time2 + "</h6><h6>第三场："
+												+ info[i].time3 + "</h6><h6>第四场："
+												+ info[i].time4 + "</h6><h6>第五场："
+												+ info[i].time5 + "</h6><h6>第六场："
+												+ info[i].time6 + "</h6></div>");
 						if(group.length==0){
 							  $("#group").html("暂无参赛小组")
 						  }else{

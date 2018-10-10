@@ -86,15 +86,18 @@ function del(id) {
 		<input type="hidden" name="nowid" value="${requestScope.activity_id}">
 		<label>学校名称</label>
 		    <select class="select school" id="school" name="school_id">
-		    <option value="0">--请选择--</option>
 		      <c:forEach items="${requestScope.school}" var="r">	    
 			    <option value="${r.id}">${r.name}</option>	
 		      </c:forEach>
 			</select>
 		<label id="lcollege" style="margin-left:-345px;margin-top: -25px">学院名称</label>
-		<select name="college_id" id="college" class="select college" style="display: inline;"></select>
+		<select name="college_id" id="college" class="select college" style="display: inline;">
+		<c:forEach items="${requestScope.college}" var="r">
+             <option value="${r.id}">${r.name}</option>
+        </c:forEach>
+		</select>
 		<button class="btn btn-sm btn-alt m-r-5" type="button"
-				onclick="openwin('../Activity_user/add?activity_id=${requestScope.activity_id}','610','400')">新增</button>
+				onclick="openwin('../Activity_user/add1?activity_id=${requestScope.activity_id}','610','400')">新增</button>
 		<button class="btn btn-sm btn-alt m-r-5" style="position: absolute;left: 443px;top: 15px"><i class="glyphicon glyphicon-search"></i>搜索</button>
 		
 		</form>		
@@ -196,10 +199,11 @@ function del(id) {
                      dataType: "json",
                      url: "../Activity_user/select?school_id="+$(".school").val(),//url
                      success: function (result) {
+                    	 $("select").find(".college").html("")
               	        $.each(result,function(val,item){
               	          if(val==0){
               	        	  $(".btn-group.bootstrap-select.select.college").find(".filter-option.pull-left").text(item.name);
-              	        	  $(".college").append("<option value='"+item.id+"' style='display:none'>"+item.name+"</option>");
+              	        	  $(".college").append("<option selected='selected' value='"+item.id+"' style='display:none'>"+item.name+"</option>");
               	        	  $(".btn-group.bootstrap-select.select.college ul").append("<li rel='"+val+"' class='selected'><a tabindex='0' class style><span class='text' id='s'>"+item.name+"</span><i class='fa fa-check check-mark'></i></a></li>");}	
               	          else{$(".btn-group.bootstrap-select.select.college ul").append("<li rel='"+val+"'><a tabindex='0' class style><span class='text' id='s'>"+item.name+"</span><i class='fa fa-check check-mark'></i></a></li>");
               	               $(".college").append("<option value='"+item.id+"' style='display:none'>"+item.name+"</option>");

@@ -13,10 +13,17 @@ public class Activity_checkwork implements Serializable{
 	private String date;
 	private String lastdate;
 	private String comments;
+	String uname;
 	
-	public static String[] check1s={"正常","迟到","早退","请假","未到"};
-	public static String[] check2s={"正常","迟到","早退","请假","未到"};
-	public static String[] check3s={"正常","迟到","早退","请假","未到"};
+	public String getUname() {
+		return uname;
+	}
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+	public static String[] check1s={"---","正常","迟到","早退","请假","未到"};
+	public static String[] check2s={"---","正常","迟到","早退","请假","未到"};
+	public static String[] check3s={"---","正常","迟到","早退","请假","未到"};
 	public String getCheck1_name() {
 		return check1s[check1];
 	}

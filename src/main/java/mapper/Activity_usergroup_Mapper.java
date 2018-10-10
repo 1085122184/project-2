@@ -58,6 +58,9 @@ public interface Activity_usergroup_Mapper extends BaicsMapper{
 	@Update("UPDATE activity set group_ids=CONCAT(group_ids,#{group_id}) where id=#{id}")
 	public void updateids(Activity a);
 	
+	@Update("UPDATE activity set ids=CONCAT(ids,#{ids}) where id=#{id}")
+	public void updatestudentids(Activity a);
+	
 	@Update("update activity_user set group_id=#{group_id2} where id in (${ids})")
 	public void updateuserid(Activity a);
 	
@@ -68,4 +71,8 @@ public interface Activity_usergroup_Mapper extends BaicsMapper{
 	
 	@Update("update activity_user set group_id=0 where group_id=#{id}")
 	public void updateuseridto02(Activity a);
+	
+	@Update("update activity_usergroup set point2=#{point2},point3=#{point3},point4=#{point4},point5=#{point5},point6=#{point6},point7=#{point7},point8=#{point8},point9=#{point9},point10=#{point10},point1=#{point1} where id=#{id}")
+	public void updatemark(Activity_usergroup a);
+	
 }

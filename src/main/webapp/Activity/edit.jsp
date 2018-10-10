@@ -41,7 +41,7 @@ margin-top: 55px
 </head>
 <body id="skin-blur-black">
         <!--<h6>修改信息<i class="glyphicon glyphicon-remove" style="margin-left: 430px" onclick="closewin()"></i></h6>-->
-		 <h6>新增操作员<i class="glyphicon glyphicon-remove" style="margin-left: 420px" onclick="closewin()"></i></h6> 
+		 <h6>新增活动<i class="glyphicon glyphicon-remove" style="margin-left: 414px" onclick="closewin()"></i></h6> 
 		<div class="modal-footer">
 		              <c:if test="${requestScope.subinfo!=null}">
 		                <form class="row form-columned" id="form1" role="form" method="post" action="../Activity/update_json?id=${requestScope.subinfo.id}" autocomplete="off">
@@ -81,11 +81,21 @@ margin-top: 55px
                                    </c:if>
                                  </c:forEach>
                                </select>
-                            </div>
- 							<div class="col-md-12" style="margin-left: 50px">
+		                  </div>
+		                  <div style="position: absolute;left: 79px;top: 191px;z-index: 100">
+		                  <label>设&nbsp;&nbsp;&nbsp;&nbsp;施</label>
+		                  
+		                  
+			<c:forEach items="${requestScope.option}" var="r" varStatus="v">
+			<div style="display:inline-block; "><input type="checkbox" class="ch" myid="${v.index}"> ${r}</div>
+			</c:forEach>
+               <input type="hidden" name="optiones" class="form-control ids"> 
+			
+		</div>
+		 <div class="col-md-12" style="margin-left: 50px;margin-top: 40px;z-index: 100">
 							    <label style="position: absolute;left: 8px;top: 0px">注意事项</label>
 								<textarea name="attention" class="form-control m-b-10" style="width: 301px;margin-left: 56px">${requestScope.subinfo.comments}</textarea>
-							</div>
+							</div> 
 							<div class="col-md-10" style="margin-left: 57px;margin-top: -34px">
 								<button type="button" class="btn btn-alt m-r-5" onclick="save()">保存</button>
 								<button type="button" class="btn btn-alt m-r-5" onclick="closewin()">返回</button>
@@ -107,8 +117,22 @@ margin-top: 55px
 		<!-- All JS functions -->
 		<script src="../admin-static/js/functions.js"></script>
 		<script src="../admin-static/js/select.min.js"></script> <!-- Custom Select -->
+		<script src="../admin-static/js/icheck.js"></script> <!-- Custom Checkbox + Radio -->
 		<script type="text/javascript" src="../component/layer-v3.0.3/layer/layer.js"></script>
 		<script type="text/javascript">
+		$(function() {
+			
+			$(".iCheck-helper").on("click",function(){
+				var ops=[];
+				   $(".ch").each(function(){
+					   if($(this).prop("checked")){
+						   ops.push($(this).attr("myid"));
+					   }
+				   }); 
+				   $(".ids").val(ops)
+			 });
+			
+		})
 function closewin() {
 	var index = parent.layer.getFrameIndex(window.name);
 	parent.layer.close(index);

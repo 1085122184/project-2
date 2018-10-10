@@ -15,5 +15,6 @@ public interface Activity_Service extends Basic_Service<Activity>{
 	public List<User> userinfo();
 	public int selectMaxId();
 	public List<Activity> selectDesc();
+	public List<Activity> selectIds(int id);
 	
 }

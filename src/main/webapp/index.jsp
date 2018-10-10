@@ -59,12 +59,6 @@
 					<div class="title">管理员</div>
 				</div>
 				
-				<div class="shortcut" onclick="Win10.openUrl('../Activity_user/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>用户列表')">
-					<img class="icon"
-						src="../img/icon/admin.png" />
-					<div class="title">用户</div>
-				</div>
-				
 				<div class="shortcut" onclick="Win10.openUrl('../Activity_usergroup/allindex?myid=0','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>分组信息')">
 					<img class="icon"
 						src="../img/icon/admin.png" />
@@ -89,11 +83,11 @@
 					<div class="title">活动</div>
 				</div>
 				
-				<div class="shortcut" onclick="Win10.openUrl('../Activity_checkwork/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>考勤列表')">
+				<!--  <div class="shortcut" onclick="Win10.openUrl('../Activity_checkwork/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>考勤列表')">
 					<img class="icon"
 						src="../img/icon/admin.png" />
 					<div class="title">考勤</div>
-				</div>
+				</div>-->
 				
 				<div class="shortcut" onclick="Win10.openUrl('../Activity_time/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>活动时间列表')">
 					<img class="icon"
@@ -104,7 +98,7 @@
 				<div class="shortcut" onclick="Win10.openUrl('../Activity_calendar/index','<img class=\'icon\' src=\'../img/icon/admin.png\'></img>用户列表')">
 					<img class="icon"
 						src="../img/icon/admin.png" />
-					<div class="title">用户</div>
+					<div class="title">日历</div>
 				</div>
 
 			</div>

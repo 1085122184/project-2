@@ -113,15 +113,14 @@
                     selectable: true,
                     selectHelper: true,
                     editable: true,
+                    allDayText:true,
                     events:${requestScope.list1},
-                     
+                    
                     //On Day Select
                     select: function(start, end, allDay) {
                     	var month=parseInt(start.getMonth())+1;
                     	var dateinfo = start.getFullYear()+"-"+month+"-"+start.getDate();
-                    	
                     	openwin("info?dateinfo="+dateinfo,'760','485')
-                    
                     },
                      
                     eventResize: function(event,dayDelta,minuteDelta,revertFunc) {

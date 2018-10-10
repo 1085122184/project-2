@@ -63,4 +63,14 @@ public void updateuseridto02(Activity a) {
 	
 }
 
+public void updatestudentids(Activity a) {
+	mapper.updatestudentids(a);
+	
+}
+
+public void updatemark(Activity_usergroup a) {
+	mapper.updatemark(a);
+	
+}
+
 }

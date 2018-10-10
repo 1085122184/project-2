@@ -107,6 +107,7 @@ function del(id) {
 						<th>time4</th>
 						<th>time5</th>
 						<th>time6</th>
+						<th>状态</th>
 						<th>地点信息</th>
 						<th>操作</th>
 					</tr>
@@ -121,14 +122,17 @@ function del(id) {
 							<td>${r.time4}</td>
 							<td>${r.time5}</td>
 							<td>${r.time6}</td>
+							<td>${r.status_name}</td>
 							<td>${r.roominfo}</td>
 							<td><a class="glyphicon glyphicon-pencil"
 								href="javascript:;"
-								onclick="openwin('../Activity_time/edit?id=${r.id}','500','300')">修改</a>
+								onclick="openwin('../Activity_time/edit?id=${r.id}&activity_id=${r.activity_id}','660','385')">修改</a>
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
 								onclick="del(${r.id})">删除</a>
 								<a class="glyphicon glyphicon-trash" href="javascript:;"
-								onclick="openwin('../Activity_college/addid?school_id=${r.id}','350','200')">新增学院</a></td>
+								onclick="openwin('../Activity_checkwork/index?activity_id=${r.activity_id}','1000','550')">考勤......</a>
+								<a class="glyphicon glyphicon-trash" href="javascript:;"
+								onclick="openwin('../Activity_market/index?activity_id=${r.activity_id}&date=${r.dateinfo}','700','400')">市场活动</a></td>
 					</tr>
 					 </c:forEach>
 				</tbody>

@@ -25,7 +25,10 @@ public interface Activity_Mapper extends BaicsMapper{
     @Select("select * from activity where id=#{id}")
 	public List<Activity> selectById(int id);
     
-	@Insert("insert into activity(courseinfo,planinfo,dateinfo,name,type,attention) values(#{courseinfo},#{planinfo},#{dateinfo},#{name},#{type},#{attention})")
+    @Select("select ids from activity where id=#{id}")
+	public List<Activity> selectIds(int id);
+    
+	@Insert("insert into activity(courseinfo,planinfo,dateinfo,name,type,attention,optiones) values(#{courseinfo},#{planinfo},#{dateinfo},#{name},#{type},#{attention},#{optiones})")
 	public void insert(Activity a);
 	
 	@Update("update activity set courseinfo=#{courseinfo},planinfo=#{planinfo},dateinfo=#{dateinfo},name=#{name},type=#{type},attention=#{attention} where id=#{id}")

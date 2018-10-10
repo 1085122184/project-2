@@ -24,7 +24,7 @@
 <link href="../admin-static/css/form.css" rel="stylesheet"><!-- button -->
 <style type="text/css">
 .sex.select.bootstrap-select.btn-group{
-margin-left: 49px;
+margin-left: 55px;
 margin-top: -49px
 }
 .school.select.bootstrap-select.btn-group{
@@ -58,9 +58,7 @@ margin-top: 55px
 .layui-layer-content.layui-layer-padding{
 color: red;
 }
-#xing{
-color: red;
-}
+
 .Type{
 margin-top: 6px;
 margin-left: 13px
@@ -68,70 +66,82 @@ margin-left: 13px
 .dropdown-menu.inner{
 width: 143px
 }
-
 .btn.btn-sm.btn-alt{
 margin-left: 1px;
 margin-top: -10px
-
 }
-
+label{
+display:inline-block;
+width: 52px
+}
 </style>
 </head>
 <body id="skin-blur-black">
         <!--<h6>修改信息<i class="glyphicon glyphicon-remove" style="margin-left: 430px" onclick="closewin()"></i></h6>-->
-		 <h6>新增用户<i class="glyphicon glyphicon-remove" style="margin-left: 537px" onclick="closewin()"></i></h6> 
-              <div style="overflow:auto;height: 306px">
-				<form class="form1" autocomplete="off" action="../Activity_usergroup/update_json?id=${requestScope.id}">
-					<input type="hidden" class="form-control ids" name="ids">
-					<table class="tile table table-bordered table-striped"
-						style="width: 100%">
-						<thead>
-							<tr>
-								<th>全选<input type="checkbox"></th>
-								<th>姓名</th>
-								<th>性别</th>
-								<th>手机</th>
-								<th>QQ</th>
-								<th>学校</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${requestScope.user2}" var="r">
-								<tr>
-									<td><input type="checkbox" class="ch" checked="checked" myid="${r.id}"></td>
-									<td>${r.name}</td>
-									<td>${r.sex_name}</td>
-									<td>${r.tel}</td>
-									<td>${r.qq}</td>
-									<td>${r.sname}</td>
-								</tr>
-							</c:forEach>
-							<c:forEach items="${requestScope.user1}" var="r">
-								<tr>
-									<td><input type="checkbox" class="ch" myid="${r.id}"></td>
-									<td>${r.name}</td>
-									<td>${r.sex_name}</td>
-									<td>${r.tel}</td>
-									<td>${r.qq}</td>
-									<td>${r.sname}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-					<div class="col-md-10">
-			 <button type="button" class="btn btn-alt m-r-5" onclick="save()" style="position: absolute;left: 239px;top: -55px">保存</button>
-			 <button type="button" class="btn btn-alt m-r-5" onclick="closewin()" style="position: absolute;left: 298px;top: -55px">返回</button>
-		           </div>
-				</form>
-			</div>
-         
+		 <h6>评分<i class="glyphicon glyphicon-remove" style="margin-left: 530px" onclick="closewin()"></i></h6> 
+		<div class="table-responsive overflow">
+           <div class="tab-content">
+              <div class="tab-pane active" id="home-b">
+              <form action="../Activity_usergroup/updatemark" class="form1">
+              <input type="hidden" name="id" value="${requestScope.point[0].id}">
+				  <table class="tile table table-bordered table-striped"
+				style="width: 100%">
+				<thead>
+					<tr>
+					    <th>分数一</th>
+					    <th>分数二</th>
+					    <th>分数三</th>
+					    <th>分数四</th>
+					    <th>分数五</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${requestScope.point}" var="r">
+						<tr>
+						    <td><input class="form-control" value="${r.point1}" name="point1"></td>
+						    <td><input class="form-control" value="${r.point2}" name="point2"></td>
+						    <td><input class="form-control" value="${r.point3}" name="point3"></td>
+						    <td><input class="form-control" value="${r.point4}" name="point4"></td>
+						    <td><input class="form-control" value="${r.point5}" name="point5"></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<table class="tile table table-bordered table-striped"
+				style="width: 100%">
+				<thead>
+					<tr>
+					    <th>分数六</th>
+					    <th>分数七</th>
+					    <th>分数八</th>
+					    <th>分数九</th>
+					    <th>分数十</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${requestScope.point}" var="r">
+						<tr>
+						    <td><input class="form-control" value="${r.point6}" name="point6"></td>
+						    <td><input class="form-control" value="${r.point7}" name="point7"></td>
+						    <td><input class="form-control" value="${r.point8}" name="point8"></td>
+						    <td><input class="form-control" value="${r.point9}" name="point9"></td>
+						    <td><input class="form-control" value="${r.point10}" name="point10"></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			</form>
+              </div>
+             </div>
+         </div>
+         <div class="col-md-10">
+			 <button type="button" class="btn btn-alt m-r-5" onclick="save()" style="position: absolute;left: 239px;top: -71px">保存</button>
+			 <button type="button" class="btn btn-alt m-r-5" onclick="closewin()" style="position: absolute;left: 298px;top: -71px">返回</button>
+		 </div>
  		<!-- Javascript Libraries -->
 		<!-- jQuery -->
 		<script src="../admin-static/js/jquery.min.js"></script>
 		<!-- jQuery Library -->
-		<script type="text/javascript"
-		src="../component/layer-v3.0.3/layer/layer.js"></script>
-	<script type="text/javascript" src="../component/layui/layui.js"></script>
 		<!-- Bootstrap -->
 		<script src="../admin-static/js/bootstrap.min.js"></script>
 		<!-- UX -->
@@ -144,17 +154,9 @@ margin-top: -10px
 		<script src="../admin-static/js/functions.js"></script>
 		<script src="../admin-static/js/select.min.js"></script> <!-- Custom Select -->
 		<script type="text/javascript" src="../component/layer-v3.0.3/layer/layer.js"></script>
-		 <script src="../admin-static/js/icheck.js"></script> <!-- Custom Checkbox + Radio -->
+		<script src="../admin-static/js/icheck.js"></script> <!-- Custom Checkbox + Radio -->
 		<script type="text/javascript">
 		$(function() {
-			var ids=[];
-			   $(".ch").each(function(){
-				   if($(this).prop("checked")){
-					   ids.push($(this).attr("myid"));
-				   }
-			   }); 
-			   $(".ids").val(ids);
-			
 			$(".iCheck-helper").eq(0).on("click",function(){
 				if($(".icheckbox_minimal").attr("class")=='icheckbox_minimal hover checked'){
 				    $(".icheckbox_minimal").addClass("checked");
@@ -173,9 +175,7 @@ margin-top: -10px
 					   }
 				   }); 
 				   $(".ids").val(ids);
-			 }); 
-			$(".btn-group.bootstrap-select.select.sex").append($("<label class='Type'><a id='xing'>*</a>类型</label>"));
-			$(".btn-group.bootstrap-select.select.school").append($("<label class='Type'><a id='xing'>*</a>学院</label>"));
+			 });
 		})
 
 		
@@ -211,7 +211,7 @@ margin-top: -10px
               	        	  $(".college").append("<option value='"+item.id+"' style='display:none'>"+item.name+"</option>");
               	        	  $(".btn-group.bootstrap-select.select.college ul").append("<li rel='"+val+"' class='selected'><a tabindex='0' class style><span class='text' id='s'>"+item.name+"</span><i class='fa fa-check check-mark'></i></a></li>");}	
               	          else{$(".btn-group.bootstrap-select.select.college ul").append("<li rel='"+val+"'><a tabindex='0' class style><span class='text' id='s'>"+item.name+"</span><i class='fa fa-check check-mark'></i></a></li>");
-              	               $(".college").append("<option value='"+item.id+"' style='display:none'>"+item.name+"</option>")
+              	              $(".college").append("<option value='"+item.id+"' style='display:none'>"+item.name+"</option>")
               	          }
               	        })
                       },

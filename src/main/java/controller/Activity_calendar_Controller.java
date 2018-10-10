@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import entity.Activity_calendar;
 import service.Activity_Service;
@@ -20,16 +23,13 @@ import utils.SearchInfo;
 public class Activity_calendar_Controller extends Basic_Controller<Activity_calendar>{
 @Resource(name="Activity_calendar_ServiceImpl")
 Activity_calendar_Service service;
-
 @Resource(name="Activity_ServiceImpl")
 Activity_Service aservice;
-
 @Override
 	public void index(SearchInfo info, ModelMap m, HttpServletRequest req) throws Exception {
 		m.put("count", service.count(info));
 		m.put("page",info.getPageno());
 		m.put("list1", JsonUtil.toString(service.selectcal()));
-		
 		super.index(info, m, req);
 	}
 	
@@ -47,8 +47,7 @@ Activity_Service aservice;
 				m.put("group", JsonUtil.toString(aservice.groupinfo(info)));
 		    	m.put("user", JsonUtil.toString(aservice.userinfo()));
 			}
-			    
-	        return "Activity_calendar/info"; 
+            return "Activity_calendar/info"; 
 	}
 	
    @Override
